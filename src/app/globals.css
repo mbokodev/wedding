@@ -1,26 +1,105 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   DIRECTION ARTISTIQUE — Mariage Cédric & Ange
+   Palette : ivoire, champagne, vert sauge, doré discret, brun profond
+   Typos   : Cormorant Garamond (titres), Jost (texte), Pinyon Script (accents)
+   ============================================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* Palette */
+  --color-ivory: #faf7f1;
+  --color-ivory-dark: #f2ecdf;
+  --color-champagne: #e8d5b0;
+  --color-champagne-light: #f3e9d5;
+  --color-sage: #9caf88;
+  --color-sage-dark: #7a8f68;
+  --color-sage-light: #e7eae0;
+  --color-gold: #b08d57;
+  --color-gold-dark: #8a7355;
+  --color-cocoa: #3e2f23;
+  --color-cocoa-light: #6b5d4f;
+  --color-night: #211a13;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Typographies (variables injectées par next/font dans layout.tsx) */
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-script: var(--font-pinyon), cursive;
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 1.2s ease both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-ivory);
+  color: var(--color-cocoa);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Sélection de texte assortie */
+::selection {
+  background-color: var(--color-champagne);
+  color: var(--color-night);
+}
+
+/* Révélation au scroll (pilotée par le composant <Reveal />) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Impression : page invitation */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
 }
