@@ -1,12 +1,9 @@
 import "server-only";
+import { db } from "@/server/db";
 
 /**
- * Accès aux invitations côté serveur.
- *
- * PHASE ACTUELLE (site public) : données de démonstration en mémoire.
- * PHASE 3+ : ce module sera branché sur PostgreSQL via Prisma —
- * seule l'implémentation de `getInvitationByToken` changera,
- * la page /invitation/[token] restera identique.
+ * Accès public aux invitations (page /invitation/[token]).
+ * Un billet annulé ou inexistant → null → 404 côté page.
  */
 
 export type PublicInvitation = {
@@ -20,31 +17,30 @@ export type PublicInvitation = {
   token: string;
 };
 
-/** Billets fictifs pour prévisualiser le design de l'invitation. */
-const DEMO_INVITATIONS: PublicInvitation[] = [
-  {
-    reference: "INV-000001",
-    guestName: "Famille Nampa",
-    guestCount: 4,
-    token: "DEMO-FAMILLE-NAMPA",
-  },
-  {
-    reference: "INV-000002",
-    guestName: "M. & Mme Talla",
-    guestCount: 2,
-    token: "DEMO-TALLA",
-  },
-  {
-    reference: "INV-000003",
-    guestName: "Mlle Sandrine Ekotto",
-    guestCount: 1,
-    token: "DEMO-SANDRINE",
-  },
-];
-
-/** Retourne l'invitation correspondant au token, ou null si introuvable. */
+/** Retourne l'invitation correspondant au token, ou null si introuvable/annulée. */
 export async function getInvitationByToken(
   token: string
 ): Promise<PublicInvitation | null> {
-  return DEMO_INVITATIONS.find((i) => i.token === token) ?? null;
+  // Garde-fou : évite une requête inutile sur un token manifestement invalide
+  if (!token || token.length > 64) return null;
+
+  const ticket = await db.ticket.findUnique({
+    where: { token },
+    select: {
+      reference: true,
+      guestName: true,
+      guestCount: true,
+      token: true,
+      status: true,
+    },
+  });
+
+  if (!ticket || ticket.status === "CANCELLED") return null;
+
+  return {
+    reference: ticket.reference,
+    guestName: ticket.guestName,
+    guestCount: ticket.guestCount,
+    token: ticket.token,
+  };
 }

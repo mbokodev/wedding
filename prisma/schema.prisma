@@ -1,0 +1,108 @@
+// ============================================================
+// Schéma de données — Application de gestion du mariage
+// ============================================================
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ------------------------------------------------------------
+// Utilisateurs de l'application privée
+// ------------------------------------------------------------
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  CHECK_IN_AGENT
+}
+
+model User {
+  id           String  @id @default(cuid())
+  fullName     String
+  /// Email OU téléphone requis (contrainte vérifiée côté application via Zod)
+  email        String? @unique
+  phone        String? @unique
+  passwordHash String
+  role         Role
+  /// Nombre de PERSONNES que l'utilisateur peut inviter.
+  /// null = sans objet (CHECK_IN_AGENT) ou illimité (SUPER_ADMIN).
+  quota        Int?
+  isActive     Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tickets  Ticket[]  @relation("TicketCreatedBy")
+  checkIns CheckIn[] @relation("CheckInBy")
+}
+
+// ------------------------------------------------------------
+// Billets / invitations
+// ------------------------------------------------------------
+
+enum TicketStatus {
+  ACTIVE
+  CHECKED_IN
+  CANCELLED
+}
+
+model Ticket {
+  id         String       @id @default(cuid())
+  /// Référence lisible, ex: INV-000125 (séquence Postgres dédiée)
+  reference  String       @unique
+  guestName  String
+  /// Nombre de personnes couvertes par ce billet (>= 1)
+  guestCount Int
+  /// Token opaque non devinable, présent dans l'URL publique et le QR code
+  token      String       @unique
+  status     TicketStatus @default(ACTIVE)
+
+  createdBy   User   @relation("TicketCreatedBy", fields: [createdById], references: [id])
+  createdById String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  checkIn CheckIn?
+
+  @@index([createdById])
+  @@index([guestName])
+  @@index([status])
+}
+
+// ------------------------------------------------------------
+// Historique des entrées
+// ------------------------------------------------------------
+
+model CheckIn {
+  id String @id @default(cuid())
+
+  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  /// UNIQUE : garantit au niveau base qu'un billet ne peut être
+  /// validé qu'une seule fois, même en cas de double scan simultané.
+  ticketId String @unique
+
+  checkedInBy   User   @relation("CheckInBy", fields: [checkedInById], references: [id])
+  checkedInById String
+
+  /// Copie du nombre de personnes au moment du scan (historique fiable)
+  guestCount  Int
+  checkedInAt DateTime @default(now())
+}
+
+// ------------------------------------------------------------
+// Paramètres globaux (ligne unique)
+// ------------------------------------------------------------
+
+model WeddingSettings {
+  id                 Int @id @default(1)
+  totalGuestCapacity Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

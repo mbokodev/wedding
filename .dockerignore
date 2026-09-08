@@ -10,3 +10,4 @@ Dockerfile
 npm-debug.log*
 .vscode
 .idea
+src/generated

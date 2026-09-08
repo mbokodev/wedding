@@ -1,0 +1,23 @@
+# PostgreSQL de développement uniquement.
+# En production (Dokploy), la base est un service Postgres géré par Dokploy.
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: wedding-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: wedding
+      POSTGRES_PASSWORD: wedding
+      POSTGRES_DB: wedding
+    ports:
+      - "5434:5432" # 5434 côté hôte (5432/5433 déjà utilisés sur cette machine)
+    volumes:
+      - wedding_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U wedding -d wedding"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  wedding_pgdata:

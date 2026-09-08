@@ -1,6 +1,11 @@
 # ============================================================
 # Dockerfile — Site de mariage (Next.js 16, pnpm, standalone)
 # Pensé pour un déploiement Dokploy (provider "Dockerfile").
+#
+# Au démarrage, le conteneur applique les migrations Prisma
+# (docker/entrypoint.sh) puis lance le serveur Next.js.
+# Variables runtime requises : DATABASE_URL
+# Build arg requis : NEXT_PUBLIC_SITE_URL
 # ============================================================
 
 # ---------- Étape 1 : dépendances ----------
@@ -25,8 +30,12 @@ COPY . .
 ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 
+# URL factice : prisma generate / next build n'ouvrent aucune connexion,
+# mais la config Prisma exige que la variable existe.
+ENV DATABASE_URL="postgresql://build:build@localhost:5432/build"
+
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN pnpm build
+RUN pnpm prisma generate && pnpm build
 
 # ---------- Étape 3 : image finale ----------
 FROM node:24-alpine AS runner
@@ -46,8 +55,18 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
+# Contexte de migration isolé (CLI Prisma + schéma + migrations).
+# Séparé du node_modules du standalone pour ne pas casser sa résolution.
+COPY --from=deps --chown=nextjs:nodejs /app/node_modules /app/migrate/node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/prisma /app/migrate/prisma
+COPY --from=builder --chown=nextjs:nodejs /app/prisma.config.ts /app/migrate/prisma.config.ts
+COPY --from=builder --chown=nextjs:nodejs /app/package.json /app/migrate/package.json
+
+COPY --chown=nextjs:nodejs docker/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
 USER nextjs
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["/app/entrypoint.sh"]
