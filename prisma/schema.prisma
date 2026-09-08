@@ -39,6 +39,24 @@ model User {
 
   tickets  Ticket[]  @relation("TicketCreatedBy")
   checkIns CheckIn[] @relation("CheckInBy")
+  sessions Session[]
+}
+
+/// Sessions opaques stockées en base : révocables immédiatement
+/// (désactivation d'un utilisateur = sessions supprimées/inertes).
+model Session {
+  id String @id @default(cuid())
+
+  /// SHA-256 du token de session (le token en clair ne vit que dans le cookie)
+  tokenHash String @unique
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
 }
 
 // ------------------------------------------------------------
