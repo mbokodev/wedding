@@ -16,7 +16,7 @@ export function Hero() {
         className="object-cover"
       />
       {/* Voile sombre pour la lisibilité */}
-      <div className="absolute inset-0 bg-gradient-to-b from-night/55 via-night/35 to-night/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-night/75 via-night/60 to-night/85" />
 
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 pt-24 pb-16 text-center">
         <p className="animate-fade-in text-xs md:text-sm uppercase tracking-[0.4em] text-champagne/90">

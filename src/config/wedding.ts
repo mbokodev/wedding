@@ -149,7 +149,7 @@ export const wedding = {
   ],
 
   /** Image du hero (plein écran) */
-  heroImage: "/images/placeholders/hero.svg",
+  heroImage: "/images/hero-bg.png",
 
   /** Informations pratiques */
   infos: [
