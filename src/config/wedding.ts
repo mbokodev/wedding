@@ -22,10 +22,10 @@ export const wedding = {
 
   /** Date et heure du début de la cérémonie (heure locale de Douala, UTC+1) */
   date: {
-    iso: "2026-12-28T14:00:00+01:00",
+    iso: "2026-12-26T14:00:00+01:00",
     /** Texte affiché sur le site */
-    display: "28 décembre 2026",
-    displayShort: "28 . 12 . 2026",
+    display: "26 décembre 2026",
+    displayShort: "26 . 12 . 2026",
   },
 
   /** Lieu principal (affiché dans le hero) */
@@ -209,9 +209,9 @@ export const wedding = {
 
   /** Métadonnées du site */
   meta: {
-    title: "Ange & Cédric — 28 décembre 2026",
+    title: "Ange & Cédric — 26 décembre 2026",
     description:
-      "Nous nous marions le 28 décembre 2026 à Douala. Retrouvez toutes les informations : programme, lieux, dress code et galerie.",
+      "Nous nous marions le 26 décembre 2026 à Douala. Retrouvez toutes les informations : programme, lieux, dress code et galerie.",
     /** URL de production (utilisée pour les QR codes et liens absolus) */
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   },
