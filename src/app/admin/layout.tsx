@@ -19,6 +19,7 @@ export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
 
   const items: AdminNavItem[] = [
     { href: "/admin", label: "Tableau de bord" },
+    { href: "/admin/tickets", label: "Billets" },
     ...(user.role === "SUPER_ADMIN"
       ? [
           { href: "/admin/users", label: "Utilisateurs" },
