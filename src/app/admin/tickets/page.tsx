@@ -114,6 +114,12 @@ export default async function TicketsPage() {
                     </td>
                     <td className="px-5 py-4 text-right">
                       <div className="flex items-center justify-end gap-4">
+                        <Link
+                          href={`/admin/tickets/${ticket.id}/invitation`}
+                          className="text-xs uppercase tracking-[0.15em] text-cocoa-light underline-offset-4 hover:underline hover:text-cocoa"
+                        >
+                          Invitation
+                        </Link>
                         {canModify && ticket.status === "ACTIVE" && (
                           <>
                             <Link
@@ -138,7 +144,7 @@ export default async function TicketsPage() {
                         )}
                         {ticket.status === "CHECKED_IN" && (
                           <span className="text-xs text-cocoa/40">
-                            Non modifiable
+                            Scanné
                           </span>
                         )}
                       </div>
