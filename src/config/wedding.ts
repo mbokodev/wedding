@@ -13,11 +13,11 @@
 export const wedding = {
   /** Identité du couple */
   couple: {
-    partner1: "Cédric",
-    partner2: "Ange",
-    /** Affichage combiné, ex: "Cédric & Ange" */
-    displayName: "Cédric & Ange",
-    initials: "C & A",
+    partner1: "Ange",
+    partner2: "Cédric",
+    /** Affichage combiné, ex: "Ange & Cédric" */
+    displayName: "Ange & Cédric",
+    initials: "A & C",
   },
 
   /** Date et heure du début de la cérémonie (heure locale de Douala, UTC+1) */
@@ -138,14 +138,14 @@ export const wedding = {
 
   /** Galerie — images placeholders à remplacer */
   gallery: [
-    { src: "/images/placeholders/gallery-1.svg", alt: "Cédric & Ange — photo 1" },
-    { src: "/images/placeholders/gallery-2.svg", alt: "Cédric & Ange — photo 2" },
-    { src: "/images/placeholders/gallery-3.svg", alt: "Cédric & Ange — photo 3" },
-    { src: "/images/placeholders/gallery-4.svg", alt: "Cédric & Ange — photo 4" },
-    { src: "/images/placeholders/gallery-5.svg", alt: "Cédric & Ange — photo 5" },
-    { src: "/images/placeholders/gallery-6.svg", alt: "Cédric & Ange — photo 6" },
-    { src: "/images/placeholders/gallery-7.svg", alt: "Cédric & Ange — photo 7" },
-    { src: "/images/placeholders/gallery-8.svg", alt: "Cédric & Ange — photo 8" },
+    { src: "/images/placeholders/gallery-1.svg", alt: "Ange & Cédric — photo 1" },
+    { src: "/images/placeholders/gallery-2.svg", alt: "Ange & Cédric — photo 2" },
+    { src: "/images/placeholders/gallery-3.svg", alt: "Ange & Cédric — photo 3" },
+    { src: "/images/placeholders/gallery-4.svg", alt: "Ange & Cédric — photo 4" },
+    { src: "/images/placeholders/gallery-5.svg", alt: "Ange & Cédric — photo 5" },
+    { src: "/images/placeholders/gallery-6.svg", alt: "Ange & Cédric — photo 6" },
+    { src: "/images/placeholders/gallery-7.svg", alt: "Ange & Cédric — photo 7" },
+    { src: "/images/placeholders/gallery-8.svg", alt: "Ange & Cédric — photo 8" },
   ],
 
   /** Image du hero (plein écran) */
@@ -209,7 +209,7 @@ export const wedding = {
 
   /** Métadonnées du site */
   meta: {
-    title: "Cédric & Ange — 28 décembre 2026",
+    title: "Ange & Cédric — 28 décembre 2026",
     description:
       "Nous nous marions le 28 décembre 2026 à Douala. Retrouvez toutes les informations : programme, lieux, dress code et galerie.",
     /** URL de production (utilisée pour les QR codes et liens absolus) */

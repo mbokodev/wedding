@@ -32,7 +32,7 @@ export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
       <header className="border-b border-cocoa/10 bg-white/70 backdrop-blur">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-5 pt-5">
           <Link href="/admin" className="font-serif text-xl text-cocoa">
-            C&nbsp;<span className="text-gold">&amp;</span>&nbsp;A
+            A&nbsp;<span className="text-gold">&amp;</span>&nbsp;C
             <span className="ml-3 text-xs font-sans uppercase tracking-[0.25em] text-cocoa-light">
               Administration
             </span>
