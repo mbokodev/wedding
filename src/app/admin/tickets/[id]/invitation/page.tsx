@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { requireUser } from "@/server/auth/guards";
 import { db } from "@/server/db";
 import { wedding } from "@/config/wedding";
 import { generateQrDataUrl } from "@/lib/qrcode";
+import { InvitationCard } from "@/components/invitation/invitation-card";
+import { DownloadableInvitation } from "@/components/admin/download-invitation-button";
 import { CopyLinkButton } from "@/components/admin/copy-link-button";
-import { DownloadQrButton } from "@/components/admin/download-qr-button";
 
 export const metadata: Metadata = {
   title: "Invitation",
@@ -53,12 +53,8 @@ export default async function TicketInvitationPage({
           ← Billets
         </Link>
         <h1 className="mt-3 font-serif text-3xl font-light text-cocoa">
-          Invitation {ticket.reference}
+          Billet {ticket.reference}
         </h1>
-        <p className="mt-1 text-sm font-light text-cocoa-light">
-          {ticket.guestName} · {ticket.guestCount}{" "}
-          {ticket.guestCount > 1 ? "personnes" : "personne"}
-        </p>
       </div>
 
       {ticket.status === "CANCELLED" && (
@@ -70,93 +66,71 @@ export default async function TicketInvitationPage({
         </div>
       )}
 
-      <div className="grid gap-8 md:grid-cols-2">
-        {/* QR Code */}
-        <div className="flex flex-col items-center border border-cocoa/10 bg-white p-8">
-          <div className="border border-gold/40 bg-white p-4">
-            <Image
-              src={qrDataUrl}
-              alt={`QR code de l'invitation ${ticket.reference}`}
-              width={240}
-              height={240}
-              unoptimized
-            />
-          </div>
-          <p className="mt-4 font-mono text-sm text-gold-dark">
-            {ticket.reference}
-          </p>
-          <div className="mt-6">
-            <DownloadQrButton
+      {/* Aperçu du billet */}
+      <div className="flex justify-center">
+        <div className="max-w-md">
+          <DownloadableInvitation filename={`billet-${ticket.reference}.png`}>
+            <InvitationCard
+              guestName={ticket.guestName}
+              guestCount={ticket.guestCount}
+              reference={ticket.reference}
               qrDataUrl={qrDataUrl}
-              filename={`invitation-${ticket.reference}.png`}
             />
+          </DownloadableInvitation>
+        </div>
+      </div>
+
+      {/* Lien et actions */}
+      <div className="mx-auto max-w-md space-y-6 border-t border-cocoa/10 pt-8">
+        <div>
+          <p className="text-xs uppercase tracking-[0.2em] text-cocoa-light">
+            Lien de l&apos;invitation
+          </p>
+          <div className="mt-2 flex items-center gap-3">
+            <input
+              type="text"
+              readOnly
+              value={invitationUrl}
+              className="flex-1 border border-cocoa/20 bg-ivory-dark px-4 py-3 text-sm text-cocoa font-mono truncate"
+            />
+            <CopyLinkButton url={invitationUrl} />
           </div>
+          <p className="mt-3 text-xs font-light text-cocoa-light">
+            Partagez ce lien par email, SMS ou WhatsApp. L&apos;invité pourra
+            consulter son invitation et présenter le QR code le jour du mariage.
+          </p>
         </div>
 
-        {/* Lien et actions */}
-        <div className="space-y-6">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-cocoa-light">
-              Lien de l&apos;invitation
-            </p>
-            <div className="mt-2 flex items-center gap-3">
-              <input
-                type="text"
-                readOnly
-                value={invitationUrl}
-                className="flex-1 border border-cocoa/20 bg-ivory-dark px-4 py-3 text-sm text-cocoa font-mono truncate"
+        <div className="flex flex-wrap justify-center gap-3">
+          <a
+            href={invitationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 border border-cocoa/25 px-5 py-3 text-xs uppercase tracking-[0.2em] text-cocoa transition-colors hover:border-gold hover:bg-gold hover:text-ivory"
+          >
+            Voir en ligne
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              aria-hidden
+            >
+              <path
+                d="M7 17L17 7M9 7h8v8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-              <CopyLinkButton url={invitationUrl} />
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-cocoa-light">
-              Actions
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={invitationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-cocoa/25 px-5 py-3 text-xs uppercase tracking-[0.2em] text-cocoa transition-colors hover:border-gold hover:bg-gold hover:text-ivory"
-              >
-                Voir l&apos;invitation
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  aria-hidden
-                >
-                  <path
-                    d="M7 17L17 7M9 7h8v8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
-              <Link
-                href={`/admin/tickets/${ticket.id}`}
-                className="inline-flex items-center gap-2 border border-cocoa/25 px-5 py-3 text-xs uppercase tracking-[0.2em] text-cocoa transition-colors hover:border-cocoa hover:bg-cocoa hover:text-ivory"
-              >
-                Modifier le billet
-              </Link>
-            </div>
-          </div>
-
-          <div className="border-t border-cocoa/10 pt-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-cocoa-light">
-              Partager
-            </p>
-            <p className="mt-2 text-sm font-light text-cocoa-light">
-              Envoyez ce lien par email, SMS ou WhatsApp. L&apos;invité pourra
-              consulter son invitation et présenter le QR code le jour du
-              mariage.
-            </p>
-          </div>
+            </svg>
+          </a>
+          <Link
+            href={`/admin/tickets/${ticket.id}`}
+            className="inline-flex items-center gap-2 border border-cocoa/25 px-5 py-3 text-xs uppercase tracking-[0.2em] text-cocoa transition-colors hover:border-cocoa hover:bg-cocoa hover:text-ivory"
+          >
+            Modifier
+          </Link>
         </div>
       </div>
     </div>
