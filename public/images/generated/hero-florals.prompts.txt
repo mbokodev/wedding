@@ -1,0 +1,8 @@
+Generated with built-in imagegen. Transparent PNG assets.
+
+hero-floral-branches.png:
+Create a premium photorealistic botanical cutout for the TOP LEFT corner of a dreamy wedding website. True transparent background. An airy asymmetric cascading olive branch arrangement with sage green silvery olive leaves, a few small ivory white blossoms and delicate tiny muted gold sprigs. Branches originate at upper left and sweep gently across the top and trail down the left edge, leaving the lower right largely empty transparent negative space. All botanical elements contained within canvas with small clear margin. Elegant natural soft sunlight, detailed organic leaves, restrained white flowers, romantic refined realistic floral styling, not a vector drawing. No text, no frame, no scenery, no vase, no shadows on a backdrop. Square image, actual alpha transparency.
+
+hero-floral-roses.png:
+Create a premium photorealistic floral cutout for the BOTTOM LEFT corner of a dreamy wedding website. True transparent background. Low lush asymmetrical arrangement of ivory garden roses, delicate white baby's breath gypsophila and sage olive leaves, subtle champagne golden sprigs. Main flowers cluster at bottom left with tapered airy foliage spreading to right and rising a little on left, upper right mostly empty transparent space. All flowers fully within canvas with small clear margin. Warm luminous soft sunlight, elegant natural petals and real botanical texture. Romantic refined wedding floral styling, not a vector drawing. No text, no frame, no scenery, no vase, no solid backdrop or fake checkerboard. Square image actual alpha transparency.
+

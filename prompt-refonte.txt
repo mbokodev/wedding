@@ -1,0 +1,93 @@
+Nous allons retravailler progressivement le site de notre mariage dans le projet existant. Lis d’abord AGENTS.md et examine le code. Respecte notamment la consigne de lire la documentation locale de Next.js dans node_modules/next/dist/docs/ avant de modifier le code.
+
+IMPORTANT : nous avançons étape par étape. Pour commencer, analyse le site de référence et propose la direction visuelle ainsi que la composition de notre accueil. Ne lance pas toute la refonte avant mon retour.
+
+SITE DE RÉFÉRENCE
+https://myribrice.com/
+
+Parcours réellement ce site, si possible dans un navigateur, pour examiner sa navigation, ses mises en page, ses animations et son comportement mobile. Explique les éléments dont nous pourrions nous inspirer.
+Si tu n’y arrives pas, dis-le clairement et demande-moi des captures. N’invente pas une analyse du site.
+
+L’objectif est de s’inspirer de sa présentation tout en utilisant notre propre identité, nos menus et notre histoire.
+
+NOTRE MARIAGE
+- Couple : Ange & Cédric.
+- Date : 26 décembre 2026.
+- Lieu : Douala, Cameroun.
+- Début de notre relation : août 2021, et non 2020.
+
+DIRECTION ARTISTIQUE
+- Couleurs : vert sauge, or et blanc.
+- Ambiance : splendeur, gloire et amour.
+- Visuel principal souhaité : un escalier avec une lumière divine au sommet, illustrant la progression vers la gloire de Dieu.
+- Une présentation élégante, lumineuse et émouvante, avec une bonne lisibilité sur mobile.
+- Pour le moment, utilise uniquement des placeholders pour les images, y compris le fond principal. Chaque placeholder doit indiquer son usage et les dimensions recommandées en pixels.
+- Ne génère et ne sélectionne aucune photo définitive à cette étape.
+
+NAVIGATION RETENUE
+1. Accueil
+2. Notre histoire
+3. Notre famille
+4. Unis dans la foi
+5. Le grand jour
+6. Informations pratiques
+
+CONTENU DES RUBRIQUES
+
+Accueil :
+- Nos prénoms, la date et le lieu.
+- Une introduction courte.
+- Un compte à rebours.
+- Le visuel d’escalier et de lumière divine comme direction pour le futur fond.
+- Une invitation à découvrir notre histoire.
+
+Notre histoire :
+Présenter notre parcours dans cet ordre :
+1. Nos premiers pas — août 2021 : le début de notre relation.
+2. Nos sorties et les moments qui ont construit notre complicité.
+3. La grossesse et l’arrivée de notre fille : placer ici les photos où Ange était enceinte, notamment notre shooting de grossesse ensemble.
+4. Mon départ au Canada, puis le départ d’Ange en France un an après.
+5. Notre relation à distance, nos appels vidéo, nos échanges et nos prières.
+6. Notre mariage en décembre 2026.
+
+La grossesse est arrivée au milieu de notre parcours, avant les départs à l’étranger. Nous avons traversé cette période tant bien que mal. Cela doit inspirer une narration sincère et pudique, sans jugement, sans dramatisation et sans inventer de détails.
+Ne donne pas de dates précises aux événements dont nous n’avons pas confirmé la date.
+
+Notre famille :
+- Consacrer cette rubrique à nos photos à trois, avec notre fille.
+- Elle aura 4 ans en novembre 2026.
+- Mettre en valeur nos souvenirs et la famille que nous construisons.
+- Les photos de grossesse vont dans « Notre histoire ».
+
+Unis dans la foi :
+- La place de Dieu dans notre couple.
+- Nos moments de prière et d’échange, notamment à distance.
+- Des emplacements pour quelques captures choisies de nos appels vidéo.
+- Tout verset ou texte personnel proposé devra être validé par nous.
+
+Le grand jour :
+- Programme, lieux, horaires et dress code.
+- S’appuyer sur les données existantes, mais signaler les informations provisoires à confirmer.
+
+Informations pratiques :
+- Accès, transport, hébergement, contacts et questions fréquentes.
+- Ne pas inventer de coordonnées ou de détails logistiques.
+
+Les photos doivent être intégrées dans les rubriques auxquelles elles correspondent ; une rubrique « Galerie » séparée n’est pas nécessaire.
+
+CONTRAINTES TECHNIQUES
+- Travailler dans le projet existant.
+- Préserver l’authentification, les rôles, l’administration, les quotas, la gestion des billets, les QR codes et les invitations téléchargeables.
+- Garder l’administration hors du menu public principal.
+- Conserver l’accès aux invitations par leurs liens personnels.
+- Réutiliser les composants et la configuration existants quand c’est pertinent.
+- Assurer une présentation responsive, accessible et respectueuse de la préférence de réduction des animations.
+
+PREMIÈRE ÉTAPE ATTENDUE
+1. Examiner le projet et le site de référence.
+2. Résumer ce que tu as réellement observé sur la référence.
+3. Proposer une palette précise et une direction typographique.
+4. Décrire la composition de notre accueil sur ordinateur et mobile.
+5. Attendre mon retour avant de commencer l’implémentation.
+
+Pour la suite, nous réaliserons d’abord l’accueil, puis les autres rubriques une par une.
