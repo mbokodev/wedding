@@ -296,9 +296,9 @@ html:has(.motion-paused) { scroll-behavior: auto; }
 .home-desktop-nav a[aria-current="location"]::after { transform: scaleX(1); }
 
 /* Le jardin accompagne l’ensemble du récit, du sauge à la lumière dorée. */
-.story-chapter { isolation: isolate; background: #e8eddf; }
-.story-garden { position: absolute; inset: 0; z-index: -2; pointer-events: none; }
-.story-garden-scene { position: sticky; top: 0; width: 100%; height: 100svh; overflow: hidden; }
+.story-chapter { isolation: isolate; overflow: clip; background: #e8eddf; }
+.story-garden { position: sticky; top: 0; width: 100%; height: 100vh; height: 100lvh; margin-bottom: -100vh; margin-bottom: -100lvh; z-index: -2; pointer-events: none; }
+.story-garden-scene { position: relative; width: 100%; height: 100%; overflow: hidden; }
 .story-garden-scene > img { object-fit: cover; object-position: center; }
 .story-garden-veil { position: absolute; inset: 0; background: linear-gradient(#26332626, #26332626), linear-gradient(90deg, #fdfbf51a, #fdfbf5a6 30%, #fdfbf5a6 70%, #fdfbf51a); }
 .story-chapter::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, #cbd9bf45 0%, transparent 35%, #ead2a130 65%, #efd3a075 93%, #fdfbf5 100%); }
