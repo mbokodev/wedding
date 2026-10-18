@@ -11,7 +11,6 @@ export function PhotoMemory({ photo, className = "", caption, sizes = "(max-widt
     <figure className={`photo-memory ${className}`}>
       <button className="photo-open" type="button" aria-label={`Agrandir : ${photo.alt}`} onClick={() => dialog.current?.showModal()}>
         <Image src={photo.src} alt={photo.alt} fill sizes={sizes} style={{ objectPosition: photo.position ?? "center" }} />
-        <span className="photo-zoom" aria-hidden="true">↗</span>
       </button>
       <figcaption><span>{caption ?? photo.label}</span><small>{caption ? photo.label : ""}</small></figcaption>
       <dialog ref={dialog} className="photo-dialog" aria-labelledby={titleId} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }}>

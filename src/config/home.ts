@@ -13,8 +13,8 @@ export const heroBackgrounds = {
 /** Identité et navigation du site public. Les récits et photos sont dans public-content.ts. */
 export const home = {
   portrait: {
-    src: "/images/generated/ange-cedric-transparent.png",
-    alt: "Ange et Cédric enlacés, en tenues blanches décontractées sur fond transparent.",
+    src: "/images/generated/ange-cedric-original-transparent.png",
+    alt: "Ange et Cédric enlacés, en chemise rouge et tee-shirt blanc, sur fond transparent.",
   },
   heroVerses: [
     { text: "C’est pourquoi l’homme quittera son père et sa mère, et s’attachera à sa femme, et ils deviendront une seule chair.", reference: "Genèse 2:24", url: "https://fr.wikisource.org/wiki/Bible_Segond_1910/Genèse", excerpt: false },

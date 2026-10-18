@@ -48,12 +48,15 @@ export function OurStory() {
           {chapter.number === "02" ? <div className="story-video-constellation">
             <StoryVideo />
             {[photos.walk, photos.portrait, photos.walk, photos.portrait].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={photo} caption="Photo provisoire" sizes="(max-width: 767px) 38vw, 220px" /></div>)}
-          </div> : chapter.media.length ? <StoryGallery media={chapter.media} caption={chapter.aside} /> : <div className="distance-map" aria-label="Cédric part au Canada, puis Ange en France un an plus tard">
+          </div> : chapter.number !== "04" ? <StoryGallery media={chapter.media} caption={chapter.aside} /> : <div className="distance-map" aria-label="Cédric part au Canada, puis Ange en France un an plus tard">
             <div className="distance-map-stars" aria-hidden="true">✦<span>✧</span>✦</div>
             <p className="home-eyebrow">Notre amour voyage</p>
             <div className="distance-map-origin">Notre chemin<span>Avant les départs</span></div>
             <svg viewBox="0 0 400 150" fill="none" aria-hidden="true"><path className="flight-path" d="M200 0C200 80 50 20 50 145M200 0C200 85 350 30 350 145" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 8" /><circle cx="200" cy="8" r="5" fill="currentColor" /><circle cx="50" cy="140" r="5" fill="currentColor" /><circle cx="350" cy="140" r="5" fill="currentColor" /></svg>
-            <div className="distance-destinations"><div>Canada<span>Cédric</span></div><div>France<span>Ange · un an après</span></div></div>
+            <div className="distance-destinations">{chapter.media.map((item, index) => item.kind === "image" && <div className="distance-destination" key={item.photo.src}>
+              <div>{index === 0 ? "Canada" : "France"}</div>
+              <PhotoMemory photo={item.photo} caption={index === 0 ? "Cédric" : "Ange · un an après"} sizes="(max-width: 767px) 45vw, 260px" />
+            </div>)}</div>
             <p className="distance-map-note">Deux horizons. Une même histoire.</p>
           </div>}
         </Reveal>

@@ -339,7 +339,7 @@ html:has(.motion-paused) { scroll-behavior: auto; }
 .story-album .photo-memory > figcaption { padding: 0 12px 10px; margin-top: -28px; position: relative; text-shadow: 0 0 12px #fffdf5, 0 1px 5px #fffdf5; }
 .story-album .photo-memory > figcaption > span { font-size: 29px; color: #6b582d; }
 .story-album .photo-memory > figcaption small { font-size: 9px; }
-.story-album-media > .distance-map { margin: auto; max-width: 520px; border: 0; background: radial-gradient(ellipse, #fffdf5ef 40%, #fffdf560 70%, transparent); border-radius: 50%; }
+.story-album-media .distance-map { margin: auto; max-width: 520px; border: 0; background: radial-gradient(ellipse, #fffdf5ef 40%, #fffdf560 70%, transparent); border-radius: 50%; }
 .story-scene-flowers { position: absolute; bottom: 15px; right: -35px; width: 190px; aspect-ratio: 1; pointer-events: none; opacity: .8; transform: scaleX(-1); }
 .story-album:nth-of-type(even) .story-scene-flowers { right: auto; left: -35px; transform: none; }
 .story-scene-flowers img { object-fit: contain; }
@@ -450,3 +450,26 @@ html:has(.motion-paused) { scroll-behavior: auto; }
   #histoire-03 .story-album-grid > :nth-child(2) { flex: none; width: 100%; margin-top: 0; }
   #histoire-03 .story-swipe-hint { display: none; }
 }
+
+/* Les portraits prolongent les deux branches du voyage. */
+.distance-destinations { gap: 16px; }
+.distance-destination { width: calc(50% - 8px); min-width: 0; }
+.distance-destination .photo-memory { margin: 8px 0 0; }
+.distance-destination .photo-open { aspect-ratio: 4/5; }
+.story-album .distance-destination .photo-memory > figcaption { margin-top: -12px; text-shadow: 0 1px 8px #fffdf5; padding-inline: 0; }
+.story-album .distance-destination .photo-memory > figcaption > span { font-family: var(--font-jost), sans-serif; font-size: 13px; color: #30432f; }
+.story-album .distance-destination .photo-memory > figcaption small { font-size: 9px; color: #4c543e; }
+@media (max-width: 767px) {
+  .distance-destinations { gap: 8px; }
+  .distance-destination { width: calc(50% - 4px); }
+  .story-album .distance-destination .photo-memory > figcaption > span { font-size: 12px; }
+}
+
+/* L’ovale reste derrière ; les portraits débordent librement au premier plan. */
+.story-album-media .distance-map { background: none; isolation: isolate; overflow: visible; }
+.distance-map::before { content: ""; position: absolute; inset: 0 0 180px; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse, #fffdf5ef 40%, #fffdf560 70%, transparent); pointer-events: none; }
+.distance-destinations { position: relative; z-index: 2; }
+.distance-destination .photo-memory { position: relative; z-index: 3; width: calc(100% + 40px); margin-left: -20px; }
+.story-album .distance-destination .photo-memory > figcaption { text-shadow: 0 1px 5px #0008; }
+.story-album .distance-destination .photo-memory > figcaption > span { color: #f0dca7; }
+.story-album .distance-destination .photo-memory > figcaption small { color: #fffaf0; }
