@@ -47,7 +47,7 @@ export function OurStory() {
         <Reveal className="story-album-media">
           {chapter.number === "02" ? <div className="story-video-constellation">
             <StoryVideo />
-            {[photos.walk, photos.portrait, photos.walk, photos.portrait].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={photo} caption="Photo provisoire" sizes="(max-width: 767px) 38vw, 220px" /></div>)}
+            {[photos.momentsDouala, photos.momentsTogether, photos.momentsSofa, photos.momentsEmbrace].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={photo} caption={index === 0 ? "À Douala, ensemble" : index === 1 ? "Un instant à deux" : index === 2 ? "Tout simplement nous" : "Dans tes bras"} sizes="(max-width: 767px) 38vw, 220px" /></div>)}
           </div> : chapter.number !== "04" ? <StoryGallery media={chapter.media} caption={chapter.aside} /> : <div className="distance-map" aria-label="Cédric part au Canada, puis Ange en France un an plus tard">
             <div className="distance-map-stars" aria-hidden="true">✦<span>✧</span>✦</div>
             <p className="home-eyebrow">Notre amour voyage</p>

@@ -85,7 +85,7 @@
 .family-photo-wrap { max-width: 850px; margin: 0 auto; padding-right: 100px; }
 .family-photo-wrap .photo-memory { animation: memory-float 8s ease-in-out infinite alternate; }
 @keyframes memory-float { from { translate: 0 -4px; rotate: -.7deg; } to { translate: 0 5px; rotate: .7deg; } }
-.family-photo-wrap .photo-open { aspect-ratio: 3/2; }
+.family-photo-wrap .photo-open { aspect-ratio: 16/9; }
 .family-letter { position: relative; max-width: 430px; margin: -90px 0 0 auto; padding: 38px 42px; background: #fffdf5f2; border: 1px solid #c3ae7c80; box-shadow: 0 20px 60px #4c5e3e20; rotate: 2deg; }
 .family-letter-heart { position: absolute; top: -22px; right: 35px; background: #fffdf5; border: 1px solid #b59658; border-radius: 50%; width: 44px; height: 44px; display: grid; place-items: center; font-size: 28px; color: #a58b4a; }
 .family-letter h3 { font-family: var(--font-cormorant),Georgia,serif; font-size: 35px; margin: 12px 0 16px; }

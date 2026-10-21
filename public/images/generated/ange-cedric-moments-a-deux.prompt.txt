@@ -1,0 +1,3 @@
+Mode: built-in image_gen, edit.
+Source: 20230902_150003.heif (JPEG conversion for decoding).
+Use case: precise-object-edit. Edit target: supplied photograph of a couple with their young daughter in foreground. Remove ONLY the child entirely from the lower left foreground. Naturally reconstruct the mother's pale blue textured blouse and lower torso behind the removed child, with anatomically plausible resting arms if needed. Preserve both adult faces EXACTLY, identity, expressions, skin texture, glasses, hair, clothing, pose, camera perspective, background, lighting and photo composition. Keep original portrait orientation. Do not beautify or restyle the couple. Photorealistic seamless removal, no child remains. Keep other details unchanged.
