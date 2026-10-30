@@ -1,7 +1,7 @@
 import { SiteHeader } from "@/components/site/site-header";
 import { Hero } from "@/components/site/hero";
 import { WeddingExperience } from "@/components/site/wedding-experience";
-import { LoveRibbon, OurStory, OurFamily, OurFaith, WeddingDay, PracticalInformation, WeddingFooter } from "@/components/site/public-sections";
+import { LoveRibbon, OurStory, OurFamily, WeddingDay, AttendanceSection, WeddingFooter } from "@/components/site/public-sections";
 import "./home.css";
 import "./chapters.css";
 
@@ -13,9 +13,8 @@ export default function HomePage() {
       <LoveRibbon />
       <OurStory />
       <OurFamily />
-      <OurFaith />
       <WeddingDay />
-      <PracticalInformation />
+      <AttendanceSection />
     </main>
     <WeddingFooter />
   </WeddingExperience>;

@@ -30,9 +30,8 @@ export const home = {
     { href: "#accueil", label: "Accueil" },
     { href: "#histoire", label: "Notre histoire" },
     { href: "#famille", label: "Notre famille" },
-    { href: "#foi", label: "Unis dans la foi" },
     { href: "#grand-jour", label: "Le grand jour" },
-    { href: "#infos", label: "Informations pratiques" },
+    { href: "#confirmation", label: "Confirmer ma présence" },
   ],
   background: heroBackgrounds.garden,
 } as const;

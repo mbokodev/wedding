@@ -1,7 +1,8 @@
 import Image from "next/image";
+import { AttendanceForm } from "@/components/site/attendance-form";
 import { wedding } from "@/config/wedding";
 import { home } from "@/config/home";
-import { chapters, photos, practicalInfos, questions } from "@/config/public-content";
+import { chapters, photos } from "@/config/public-content";
 import { Reveal } from "@/components/ui/reveal";
 import { PhotoMemory } from "@/components/site/photo-memory";
 import { Petals } from "@/components/site/petals";
@@ -69,11 +70,11 @@ export function OurStory() {
 
 export function OurFamily() {
   return <section id="famille" className="family-chapter" aria-labelledby="family-title">
+    <Image src={photos.family.src} alt="" fill sizes="100vw" className="family-scene-background" />
+    <div className="family-scene-veil" aria-hidden="true" />
     <span id="galerie" />
     <ChapterHeading id="family-title" eyebrow="Chapitre II · Notre famille" title="Notre bonheur" accent="se vit à trois." text="Notre fille, nos souvenirs, et cette famille que nous construisons ensemble." />
     <div className="family-scene">
-      <Image src={photos.family.src} alt="" fill sizes="100vw" className="family-scene-background" />
-      <div className="family-scene-veil" />
       <Petals gentle />
       <Reveal className="family-photo-wrap"><PhotoMemory photo={photos.family} caption="Nous trois, tout simplement." sizes="(max-width: 767px) 90vw, 65vw" /></Reveal>
       <Reveal className="family-letter" delay={180}>
@@ -89,62 +90,51 @@ export function OurFamily() {
   </section>;
 }
 
-export function OurFaith() {
-  return <section id="foi" className="faith-chapter" aria-labelledby="faith-title">
-    <ChapterHeading id="faith-title" eyebrow="Chapitre III · Unis dans la foi" title="Un même amour," accent="une même lumière." text="La place de Dieu dans notre couple, dans nos échanges et dans le chemin que nous parcourons." />
-    <div className="faith-layout">
-      <Reveal className="faith-image"><PhotoMemory photo={photos.faith} className="photo-arch" caption="Un temps pour nous, un temps pour Dieu." /></Reveal>
-      <Reveal className="faith-copy" delay={120}>
-        <p className="home-eyebrow">Même à distance</p><h3>Se retrouver<br /><em>dans la prière.</em></h3>
-        <p>Entre le Canada et la France, nos appels vidéo et nos échanges nous permettent de partager notre quotidien. La prière a aussi sa place dans ces moments à deux.</p>
-        <blockquote><p>«&nbsp;{home.verses[0].text}&nbsp;»</p><cite><a href={home.verses[0].url} target="_blank" rel="noreferrer">{home.verses[0].reference}</a></cite></blockquote>
-        <p>Unis par l’amour, guidés par Dieu : cette promesse accompagne le chemin que nous souhaitons parcourir ensemble.</p>
-      </Reveal>
-    </div>
-    <Reveal className="distance-calls">
-      <div className="calls-intro"><p className="home-eyebrow">Nos rendez-vous à distance</p><h3>Un écran entre nous.<br /><em>Un lien qui demeure.</em></h3><p>Quelques captures choisies de nos appels viendront raconter ces moments.</p></div>
-      <div className="call-frames">
-        {[{name:"Cédric", place:"Canada"}, {name:"Ange", place:"France"}].map((person, i) => <div className={`call-frame call-frame-${i}`} key={person.name}>
-          <div className="call-screen"><span className="call-avatar" aria-hidden="true">{person.name.charAt(0)}</span><p>Capture à venir</p><small>Appel vidéo · 900 × 1600 px</small></div>
-          <div className="call-person"><strong>{person.name}</strong><span>{person.place}</span></div>
-          <div className="call-controls" aria-hidden="true"><span>♡</span><span>◉</span><span>⌁</span></div>
-        </div>)}
-        <span className="call-connection" aria-hidden="true">♡</span>
-      </div>
-    </Reveal>
-  </section>;
-}
-
 export function WeddingDay() {
   return <section id="grand-jour" className="day-chapter" aria-labelledby="day-title">
     <div className="day-cover">
       <Image src={photos.reception.src} alt={photos.reception.alt} fill sizes="100vw" />
       <div className="day-cover-shade" />
-      <div className="day-cover-content"><p className="home-eyebrow">Chapitre IV · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><a className="calendar-button" href="/mariage-ange-cedric.ics" download>Enregistrer la date <span aria-hidden="true">↗</span></a></div>
+      <div className="day-cover-content"><p className="home-eyebrow">Chapitre III · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><a className="calendar-button" href="/mariage-ange-cedric.ics" download>Enregistrer la date <span aria-hidden="true">↗</span></a></div>
       <span className="day-image-note">Décor imaginé · illustration générée</span>
     </div>
     <div id="programme" className="day-program">
       <Reveal className="program-heading"><p className="home-eyebrow">Les moments de la journée</p><h3>Du premier regard<br /><em>à la dernière danse.</em></h3><span className="provisional-label">Programme prévisionnel · horaires à confirmer</span></Reveal>
       <ol className="program-steps">{wedding.program.map((step,i) => <Reveal key={step.time} as="li" delay={i * 70}><span className="program-icon" aria-hidden="true">{["♧","✧","♡","◇","♫"][i]}</span><span className="program-time">{step.time}</span><h4>{step.title}</h4><p>{step.description}</p></Reveal>)}</ol>
     </div>
-    <div id="lieux" className="day-venues">
-      <Reveal className="venue-intro"><p className="home-eyebrow">Les lieux de notre journée</p><h3>À Douala,<br /><em>avec vous.</em></h3><p>Les lieux ci-dessous sont provisoires. Les adresses et les itinéraires seront publiés après confirmation.</p></Reveal>
-      {wedding.venues.map((venue,i) => <Reveal key={venue.name} className="venue-card" delay={i * 120}><span className="venue-number" aria-hidden="true">0{i + 1}</span><p className="home-eyebrow">{venue.role}</p><h4>{venue.name}</h4><span className="provisional-label">Lieu à confirmer</span><p>Douala, Cameroun</p></Reveal>)}
-    </div>
-    <Reveal as="section" className="dress-palette" >
-      <div id="dress-code"><p className="home-eyebrow">L’esprit de la fête</p><h3>Sauge, or <em>&amp; blanc.</em></h3><p>Une harmonie lumineuse pour notre célébration.</p></div>
-      <div className="palette-swatches">{[{name:"Vert sauge",hex:"#a3b39a"},{name:"Or doux",hex:"#b59658"},{name:"Blanc",hex:"#fffdf7"}].map(color => <div key={color.name}><span style={{background:color.hex}} /><p>{color.name}</p></div>)}</div>
-      <p className="dress-note"><strong>Dress code proposé :</strong> tenue de soirée ou tenue traditionnelle élégante. Les consignes définitives, notamment concernant le blanc, restent à confirmer.</p>
-    </Reveal>
+    <section id="dress-code" className="dress-theme" aria-labelledby="dress-title">
+      <Petals gentle />
+      <div className="dress-theme-layout">
+        <Reveal className="dress-theme-copy">
+          <h3 id="dress-title"><span className="dress-theme-label">Notre thème</span>Sauge, or <em>&amp; blanc.</em></h3>
+          <div className="dress-ornament" aria-hidden="true"><span />♡<span /></div>
+          <div className="palette-swatches">{[{name:"Vert sauge",hex:"#a3b39a"},{name:"Or doux",hex:"#b59658"},{name:"Blanc",hex:"#fffdf7"}].map(color => <div key={color.name}><span style={{background:color.hex}} /><p>{color.name}</p></div>)}</div>
+          <p className="dress-invitation">Des nuances douces, une touche d’or et le plaisir de célébrer ensemble. Venez élégants, venez vous-mêmes.</p>
+          <p className="dress-signature">Une harmonie qui nous ressemble.</p>
+          <p className="dress-note"><strong>Dress code proposé :</strong> tenue de soirée ou tenue traditionnelle élégante. Les consignes définitives, notamment concernant le blanc, restent à confirmer.</p>
+        </Reveal>
+        <Reveal className="dress-theme-visual" delay={160}>
+          <Image src="/images/generated/tenues-soiree-sauge.png" alt="Inspiration de tenues de soirée : costume sauge pour homme et robe satinée sauge avec accessoires dorés pour femme" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" />
+          <p>Inspiration de tenues · illustration générée</p>
+        </Reveal>
+      </div>
+    </section>
   </section>;
 }
 
-export function PracticalInformation() {
-  return <section id="infos" className="practical-chapter" aria-labelledby="infos-title">
-    <ChapterHeading id="infos-title" eyebrow="Chapitre V · Informations pratiques" title="Tout pour" accent="nous retrouver." text="Les repères utiles pour préparer votre venue. Nous compléterons ici chaque information confirmée." />
-    <div className="practical-grid">{practicalInfos.map((info,i) => <Reveal key={info.title} className="practical-card" delay={i*70}><span aria-hidden="true">{info.icon}</span><h3>{info.title}</h3><p>{info.text}</p></Reveal>)}</div>
-    <div className="faq-layout"><Reveal className="faq-intro"><p className="home-eyebrow">Vous vous demandez peut-être…</p><h3>Quelques réponses,<br /><em>tout simplement.</em></h3><p>Les informations encore provisoires seront mises à jour au fil des préparatifs.</p><div className="faq-flower" aria-hidden="true">✾</div></Reveal>
-      <div className="faq-items">{questions.map((item,i) => <details key={item.question} name="wedding-faq"><summary><span className="faq-number">0{i+1}</span>{item.question}<span className="faq-plus" aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div>
+export function AttendanceSection() {
+  return <section id="confirmation" className="attendance-closing" aria-labelledby="attendance-title">
+    <div className="attendance-veil" aria-hidden="true" />
+    <Petals gentle />
+    <div className="attendance-layout">
+      <Reveal className="attendance-welcome">
+        <div className="attendance-portrait"><Image src="/images/generated/ange-cedric-baiser-sauge.png" alt="Ange embrassant Cédric sur la joue, portrait cadré au torse" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" /></div>
+        <div className="attendance-overlay-copy"><p className="attendance-script">Le plus beau jour se partage…</p>
+        <h2 id="attendance-title">Et si vous étiez<br /><em>à nos côtés ?</em></h2>
+        <p>Un sourire, une étreinte, une danse… Nous avons hâte de vivre ces instants avec vous.</p>
+        <span className="attendance-date">26 décembre 2026 · Douala</span></div>
+      </Reveal>
+      <Reveal className="attendance-card" delay={120}><AttendanceForm /></Reveal>
     </div>
   </section>;
 }
