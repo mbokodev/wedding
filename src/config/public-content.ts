@@ -16,12 +16,12 @@ export const photos = {
   momentsDouala: { src: "/images/ange-cedric-moments-douala.jpg", alt: "Selfie d’Ange et Cédric à Douala", label: "Un souvenir à Douala", position: "center 38%" },
   familyMemory: { src: "/images/generated/le-bonheur-a-trois-transparent.png", alt: "Ange, Cédric et leur fille réunis pour une photo de famille", label: "Notre bonheur à trois", position: "center" },
   firstSteps: { src: "/images/nos-premiers-pas-v2.jpeg", alt: "Ange et Cédric assis ensemble, un souvenir de leurs premiers pas", label: "Un souvenir à deux", position: "center top" },
-  portrait: { src: "/images/ange-cedric-portrait.png", alt: "Ange et Cédric enlacés en tenues blanches", label: "Portrait retouché validé" },
-  walk: { src: "/images/generated/story-walk.png", alt: "Illustration d’un couple se promenant dans un jardin lumineux", label: "Illustration générée · photo à remplacer", position: "62% center" },
+  portrait: { src: "/images/ange-cedric-portrait.png", alt: "Ange et Cédric enlacés en tenues blanches", label: "" },
+  walk: { src: "/images/generated/story-walk.png", alt: "Un couple se promenant dans un jardin lumineux", label: "", position: "62% center" },
   maternity: { src: "/images/ange-cedric-grossesse.jpg", alt: "Ange enceinte et Cédric posant ensemble, les mains sur son ventre", label: "Notre séance grossesse · The Studio Douala", position: "center top" },
   family: { src: "/images/generated/famille-jardin-paysage.png", alt: "Ange, Cédric et leur fille dans un jardin à la lumière dorée", label: "Notre bonheur à trois", position: "center" },
-  faith: { src: "/images/generated/faith-light.png", alt: "Une Bible ouverte dans une lumière douce, à côté d’une bougie", label: "Illustration générée · ambiance de prière" },
-  reception: { src: "/images/generated/reception-dream.png", alt: "Décor imaginé de réception, fleurs blanches, bougies et touches sauge", label: "Décor illustratif généré · lieu non contractuel" },
+  faith: { src: "/images/generated/faith-light.png", alt: "Une Bible ouverte dans une lumière douce, à côté d’une bougie", label: "" },
+  reception: { src: "/images/generated/reception-dream.png", alt: "Décor de réception, fleurs blanches, bougies et touches sauge", label: "" },
 } satisfies Record<string, PublicPhoto>;
 
 export type StoryMedia =

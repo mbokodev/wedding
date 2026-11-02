@@ -20,7 +20,7 @@ function ChapterHeading({ eyebrow, title, accent, text, id }: { eyebrow: string;
 }
 
 export function LoveRibbon() {
-  const words = ["Ange & Cédric", "26 décembre 2026", "Douala, Cameroun", "Sauge, or & blanc", "Une histoire à partager"];
+  const words = ["Ange & Cédric", "26 décembre 2026", "Douala, Cameroun", "Vert sauge, blanc & or", "Une histoire à partager"];
   return <div className="love-ribbon" aria-label="Ange et Cédric, le 26 décembre 2026 à Douala"><div className="ribbon-track" aria-hidden="true">{[0, 1].map(copy => <div key={copy}>{words.map(word => <span key={word}>{word}<i>✦</i></span>)}</div>)}</div></div>;
 }
 
@@ -64,7 +64,6 @@ export function OurStory() {
         <div className="story-scene-flowers" aria-hidden="true"><Image src="/images/generated/hero-floral-roses.png" alt="" fill sizes="(max-width: 767px) 120px, 220px" /></div>
       </div>)}
     </div>
-    <p className="illustration-note">Les scènes illustratives sont générées en attendant nos véritables photos.</p>
   </section>;
 }
 
@@ -82,7 +81,6 @@ export function OurFamily() {
         <p className="home-eyebrow">Une place dans nos cœurs</p>
         <h3>Notre petite famille</h3>
         <p>Notre fille aura quatre ans en novembre 2026. Elle fait pleinement partie de cette histoire et de la famille que nous continuons de construire.</p>
-        <p>Cette page accueillera nos photos à trois, nos souvenirs et ces instants que nous avons envie de garder.</p>
         <span className="family-signature">Ange, Cédric &amp; notre fille</span>
       </Reveal>
     </div>
@@ -96,7 +94,6 @@ export function WeddingDay() {
       <Image src={photos.reception.src} alt={photos.reception.alt} fill sizes="100vw" />
       <div className="day-cover-shade" />
       <div className="day-cover-content"><p className="home-eyebrow">Chapitre III · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><a className="calendar-button" href="/mariage-ange-cedric.ics" download>Enregistrer la date <span aria-hidden="true">↗</span></a></div>
-      <span className="day-image-note">Décor imaginé · illustration générée</span>
     </div>
     <div id="programme" className="day-program">
       <Reveal className="program-heading"><p className="home-eyebrow">Les moments de la journée</p><h3>Du premier regard<br /><em>à la dernière danse.</em></h3><span className="provisional-label">Programme prévisionnel · horaires à confirmer</span></Reveal>
@@ -106,16 +103,15 @@ export function WeddingDay() {
       <Petals gentle />
       <div className="dress-theme-layout">
         <Reveal className="dress-theme-copy">
-          <h3 id="dress-title"><span className="dress-theme-label">Notre thème</span>Sauge, or <em>&amp; blanc.</em></h3>
+          <h3 id="dress-title"><span className="dress-theme-label">Notre thème</span>Vert sauge, <em>blanc &amp; or.</em></h3>
           <div className="dress-ornament" aria-hidden="true"><span />♡<span /></div>
-          <div className="palette-swatches">{[{name:"Vert sauge",hex:"#a3b39a"},{name:"Or doux",hex:"#b59658"},{name:"Blanc",hex:"#fffdf7"}].map(color => <div key={color.name}><span style={{background:color.hex}} /><p>{color.name}</p></div>)}</div>
+          <div className="palette-swatches">{[{name:"Vert sauge",hex:"#a3b39a"},{name:"Blanc",hex:"#fffdf7"},{name:"Or",hex:"#b59658"}].map(color => <div key={color.name}><span style={{background:color.hex}} /><p>{color.name}</p></div>)}</div>
           <p className="dress-invitation">Des nuances douces, une touche d’or et le plaisir de célébrer ensemble. Venez élégants, venez vous-mêmes.</p>
           <p className="dress-signature">Une harmonie qui nous ressemble.</p>
           <p className="dress-note"><strong>Dress code proposé :</strong> tenue de soirée ou tenue traditionnelle élégante. Les consignes définitives, notamment concernant le blanc, restent à confirmer.</p>
         </Reveal>
         <Reveal className="dress-theme-visual" delay={160}>
           <Image src="/images/generated/tenues-soiree-sauge.png" alt="Inspiration de tenues de soirée : costume sauge pour homme et robe satinée sauge avec accessoires dorés pour femme" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" />
-          <p>Inspiration de tenues · illustration générée</p>
         </Reveal>
       </div>
     </section>
@@ -144,6 +140,5 @@ export function WeddingFooter() {
     <div className="finale-glow" aria-hidden="true" /><Petals gentle />
     <Reveal><p className="home-eyebrow">La suite de notre histoire</p><h2>On a hâte<br /><em>de vous retrouver.</em></h2><p>Merci de partager avec nous la joie de ce nouveau chapitre.</p><a href="#accueil" className="finale-names">Ange &amp; Cédric</a><p className="finale-date">26 décembre 2026 · Douala, Cameroun</p></Reveal>
     <nav aria-label="Navigation de pied de page">{home.navigation.map(item=><a key={item.href} href={item.href}>{item.label}</a>)}</nav>
-    <p className="finale-note">Avec amour · Les illustrations provisoires seront remplacées par nos photos.</p>
   </footer>;
 }
