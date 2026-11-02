@@ -6,7 +6,9 @@ Site Next.js avec invitations privées PostgreSQL et confirmations de présence 
 
 Importer le dépôt GitLab `vlc123/ange_de_cedric`, branche `main`. Sélectionner **Next.js**, le dossier racine du dépôt et **Node.js 24.x**. Garder la commande de build `pnpm build` et le dossier de sortie par défaut. Le build génère automatiquement le client Prisma ; il ne modifie pas la base de données.
 
-Configurer dans **Settings → Environment Variables** avant le premier déploiement :
+Le site public peut être construit et déployé sans base de données. Prisma est généré sans connexion ; le client de base est initialisé seulement lorsqu’une fonctionnalité privée l’utilise. L’administration, les invitations et le contrôle des entrées nécessitent une véritable `DATABASE_URL` et les migrations avant leur utilisation.
+
+Configurer dans **Settings → Environment Variables** :
 
 | Variable | Valeur |
 | --- | --- |
