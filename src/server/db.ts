@@ -25,22 +25,8 @@ function createPrismaClient() {
   return new PrismaClient({ adapter });
 }
 
-let client = globalForPrisma.prisma;
+export const db = globalForPrisma.prisma ?? createPrismaClient();
 
-function getPrismaClient() {
-  if (!client) {
-    client = createPrismaClient();
-    if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = client;
-  }
-  return client;
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = db;
 }
-
-// Importer les routes privées pendant le build ne doit pas exiger de base.
-// La vérification DATABASE_URL reste obligatoire dès la première utilisation.
-export const db = new Proxy({} as PrismaClient, {
-  get(_target, property) {
-    const prisma = getPrismaClient();
-    const value = Reflect.get(prisma, property, prisma);
-    return typeof value === "function" ? value.bind(prisma) : value;
-  },
-});
