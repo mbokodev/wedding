@@ -404,7 +404,7 @@
   .dream-portrait { width: min(62vw, 560px); }
 }
 @media (max-width: 767px) {
-  .dream-portrait { width: min(76vw, max(145px, calc((100svh - 420px) * .8)), 340px); }
+  .dream-portrait { width: min(94vw, max(185px, calc((100svh - 300px) * .8)), 440px); margin-top: 10px; margin-bottom: 6px; }
   .dream-orbit { width: calc(100% + 24px); }
   .dream-orbit-counter { width: 52px; height: 52px; }
 }
