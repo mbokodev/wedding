@@ -48,7 +48,7 @@ export function OurStory() {
         <Reveal className="story-album-media">
           {chapter.number === "02" ? <div className="story-video-constellation">
             <StoryVideo />
-            {[photos.momentsDouala, photos.momentsTogether, photos.momentsSofa, photos.momentsEmbrace].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={photo} caption={index === 0 ? "Rien que nous deux" : index === 1 ? "Juste toi et moi" : index === 2 ? "Nos doux débuts" : "Nos instants précieux"} sizes="(max-width: 767px) 38vw, 220px" /></div>)}
+            {[photos.momentsDouala, photos.momentsTogether, photos.momentsSofa, photos.momentsEmbrace].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={{ ...photo, label: "" }} sizes="(max-width: 767px) 38vw, 220px" /></div>)}
           </div> : chapter.number === "05" ? <div className="story-prayer-triptych">
             <div className="story-prayer-images" role="group" aria-label="Nos prières et nos conversations à distance">
               {chapter.media.map(item => item.kind === "image" && <PhotoMemory key={item.photo.src} photo={item.photo} caption="" sizes="(max-width: 767px) 35vw, 240px" />)}
@@ -57,13 +57,12 @@ export function OurStory() {
           </div> : chapter.number !== "04" ? <StoryGallery media={chapter.media} caption={chapter.aside} /> : <div className="distance-map" aria-label="Cédric part au Canada, puis Ange en France un an plus tard">
             <div className="distance-map-stars" aria-hidden="true">✦<span>✧</span>✦</div>
             <p className="home-eyebrow">Notre amour voyage</p>
-            <div className="distance-map-origin">Notre chemin<span>Avant les départs</span></div>
+            <div className="distance-map-origin">Notre chemin<span>Après le départ</span></div>
             <svg viewBox="0 0 400 150" fill="none" aria-hidden="true"><path className="flight-path" d="M200 0C200 80 50 20 50 145M200 0C200 85 350 30 350 145" stroke="currentColor" strokeWidth="1.5" strokeDasharray="5 8" /><circle cx="200" cy="8" r="5" fill="currentColor" /><circle cx="50" cy="140" r="5" fill="currentColor" /><circle cx="350" cy="140" r="5" fill="currentColor" /></svg>
             <div className="distance-destinations">{chapter.media.map((item, index) => item.kind === "image" && <div className="distance-destination" key={item.photo.src}>
               <div>{index === 0 ? "Canada" : "France"}</div>
               <PhotoMemory photo={item.photo} caption={index === 0 ? "Cédric" : "Ange · un an après"} sizes="(max-width: 767px) 45vw, 260px" />
             </div>)}</div>
-            <p className="distance-map-note">Deux horizons. Une même histoire.</p>
           </div>}
         </Reveal>
         <div className="story-scene-flowers" aria-hidden="true"><Image src="/images/generated/hero-floral-roses.png" alt="" fill sizes="(max-width: 767px) 120px, 220px" /></div>
@@ -109,6 +108,7 @@ export function WeddingDay() {
       <div className="dress-theme-layout">
         <Reveal className="dress-theme-copy">
           <h3 id="dress-title"><span className="dress-theme-label">Notre thème</span>Vert sauge, <em>blanc &amp; or.</em></h3>
+          <p className="dress-meaning">Amour, grâce, prestance</p>
           <div className="dress-ornament" aria-hidden="true"><span />♡<span /></div>
           <div className="palette-swatches">{[{name:"Vert sauge",hex:"#a3b39a"},{name:"Blanc",hex:"#fffdf7"},{name:"Or",hex:"#b59658"}].map(color => <div key={color.name}><span style={{background:color.hex}} /><p>{color.name}</p></div>)}</div>
           <p className="dress-invitation">Des nuances douces, une touche d’or et le plaisir de célébrer ensemble. Venez élégants, venez vous-mêmes.</p>
@@ -117,6 +117,7 @@ export function WeddingDay() {
         <Reveal className="dress-theme-visual" delay={160}>
           <Image src="/images/generated/tenues-soiree-sauge.png" alt="Inspiration de tenues de soirée : costume sauge pour homme et robe satinée sauge avec accessoires dorés pour femme" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" />
         </Reveal>
+        <Reveal className="dress-note"><strong>Dress code proposé :</strong> tenue de soirée ou tenue traditionnelle élégante.</Reveal>
       </div>
     </section>
   </section>;
@@ -128,11 +129,11 @@ export function AttendanceSection() {
     <Petals gentle />
     <div className="attendance-layout">
       <Reveal className="attendance-welcome">
-        <div className="attendance-portrait"><Image src="/images/generated/ange-cedric-baiser-sauge.png" alt="Ange embrassant Cédric sur la joue, portrait cadré au torse" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" /></div>
+        <div className="attendance-portrait"><Image src="/images/generated/ange-cedric-confirmation-transparent.png" alt="Ange embrasse Cédric sur la joue, tous deux en hauts blancs Bride et Groom" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" /></div>
         <div className="attendance-overlay-copy"><p className="attendance-script">Le plus beau jour se partage…</p>
         <h2 id="attendance-title">Et si vous étiez<br /><em>à nos côtés ?</em></h2>
         <p>Un sourire, une étreinte, une danse… Nous avons hâte de vivre ces instants avec vous.</p>
-        <span className="attendance-date">26 décembre 2026 · Douala</span></div>
+        </div>
       </Reveal>
       <Reveal className="attendance-card" delay={120}><AttendanceForm /></Reveal>
     </div>

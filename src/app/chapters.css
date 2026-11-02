@@ -495,7 +495,7 @@ html:has(.motion-paused) { scroll-behavior: auto; }
 
 /* Confirmation de présence */
 .attendance-closing { position: relative; isolation: isolate; overflow: hidden; padding: 100px 35px; background: #66755b url('/images/generated/story-garden-sage.png') center/cover no-repeat; }
-.attendance-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(110deg,#273924bb,#53634770 55%,#6d795d66); }
+.attendance-veil { position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(0 0 0 / 88%) 0%, rgb(0 0 0 / 64%) 38%, rgb(0 0 0 / 20%) 70%, transparent 100%), linear-gradient(110deg,#273924bb,#53634770 55%,#6d795d66); }
 .attendance-layout { max-width: 1180px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
 .attendance-welcome { position: relative; text-align: center; color: #fff9e9; padding-bottom: 70px; }
 .attendance-portrait { width: 120%; aspect-ratio: 1.08; overflow: hidden; margin: 0 -10%; mask-image: linear-gradient(#000 48%,#000b 70%,transparent 100%); }
@@ -511,8 +511,8 @@ html:has(.motion-paused) { scroll-behavior: auto; }
 .attendance-form h3 { font-family: var(--font-pinyon),cursive; color: #4b6244; font-size: clamp(36px,3.7vw,52px); line-height: 1.2; text-align: center; }
 .attendance-form > p { color: #6b725f; font-size: 13px; line-height: 1.8; text-align: center; margin-top: 12px; }
 .attendance-progress { display: flex; justify-content: center; gap: 12px; margin: 25px 0; }
-.attendance-progress span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid #c2aa75; color: #b59658; }
-.attendance-progress span:first-child,.attendance-progress .is-active { color: white; background: #b59658; }
+.attendance-progress > span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid #c2aa75; color: #b59658; }
+.attendance-progress > span:first-child,.attendance-progress > .is-active { color: white; background: #b59658; }
 .attendance-form fieldset { border: 0; padding: 0; margin: 0 0 20px; }
 .attendance-form legend,.attendance-form > label { font-size: 13px; color: #40523b; }
 .attendance-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
@@ -581,4 +581,56 @@ html:has(.motion-paused) { scroll-behavior: auto; }
   left: 0;
   width: 100%;
   margin: 0 0 8px;
+}
+
+.dress-theme .dress-note {
+  margin-top: 28px;
+  padding: 22px 24px;
+  border: 1px solid #b59658;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fffdf3, #e7eddf);
+  color: #354b30;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(22px, 2.3vw, 30px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 8px 24px #53664e12;
+}
+.dress-theme .dress-note strong {
+  display: inline;
+  margin-right: .25em;
+  color: #846322;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+.dress-meaning {
+  margin: 0 0 24px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(24px, 2.7vw, 34px);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #876b36;
+}
+
+.attendance-form > .attendance-deadline {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border: 1px solid #b5965866;
+  border-radius: 12px;
+  background: #f3efdf;
+  color: #40523b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.attendance-deadline strong { display: block; margin-top: 6px; font-size: 20px; font-weight: 700; color: #40523b; }
+
+.story-chapter .chapter-heading > p:last-child { font-size: 17px; }
+@media (max-width: 767px) {
+  .story-chapter .chapter-heading > p:last-child { font-size: 15px; }
 }

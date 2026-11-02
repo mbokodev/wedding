@@ -45,8 +45,9 @@ export function AttendanceForm() {
     <span className="attendance-seal" aria-hidden="true">♡</span>
     <h3 ref={stepHeading} tabIndex={-1}>{step === 3 ? "Merci pour votre réponse !" : "Confirmer ma présence"}</h3>
     <p>Un petit mot de vous, beaucoup de joie pour nous.</p>
+    {step < 3 && <p className="attendance-deadline">Merci de confirmer votre présence avant le <strong>30 novembre 2026.</strong></p>}
     <div className="attendance-progress" aria-label={`Étape ${step} sur 3`}>
-      {[1, 2, 3].map(number => <span key={number} className={number <= step ? "is-active" : ""} aria-current={number === step ? "step" : undefined}>{number}</span>)}
+      {[1, 2, 3].map(number => <span key={number} className={number <= step ? "is-active" : ""} aria-current={number === step ? "step" : undefined} aria-label={`Étape ${number}`}><span aria-hidden="true">♡</span></span>)}
     </div>
     {step === 1 && <>
       <fieldset><legend>Serez-vous présent(e) ?</legend><div className="attendance-choices">
