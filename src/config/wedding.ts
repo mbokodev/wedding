@@ -72,29 +72,24 @@ export const wedding = {
   /** Programme de la journée */
   program: [
     {
+      time: "09h00",
+      title: "Le grand Oui 💍",
+      description: "Cérémonie civile à la mairie",
+    },
+    {
+      time: "11h00",
+      title: "Une douce parenthèse 🥂",
+      description: "Mignardises et instants de partage",
+    },
+    {
       time: "14h00",
-      title: "Cérémonie",
-      description: "Échange des vœux entouré de nos proches.",
+      title: "Notre union devant Dieu 🤍",
+      description: "Cérémonie religieuse à l’église",
     },
     {
-      time: "17h00",
-      title: "Cocktail & photos",
-      description: "Un moment de détente, de bulles et de souvenirs.",
-    },
-    {
-      time: "19h00",
-      title: "Réception",
-      description: "Accueil des invités dans la salle de réception.",
-    },
-    {
-      time: "21h00",
-      title: "Dîner",
-      description: "Un dîner raffiné aux saveurs d'ici et d'ailleurs.",
-    },
-    {
-      time: "23h00",
-      title: "Soirée",
-      description: "Place à la danse, jusqu'au bout de la nuit.",
+      time: "18h00",
+      title: "Place à la célébration ✨",
+      description: "Réception et soirée de mariage",
     },
   ],
 

@@ -423,7 +423,7 @@
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
 }
-.dream-couple-photo { transform: translateY(7%) scale(.95); object-position: center; }
+.dream-couple-photo { transform: none; object-position: center; }
 .dream-portrait .dream-faith-signature { margin-top: 18px; }
 @media (max-width: 767px) {
   .dream-portrait .dream-faith-signature { margin-top: 16px; }
@@ -434,27 +434,6 @@
 .dream-portrait-frame { isolation: isolate; }
 .dream-photo { z-index: 1; }
 .dream-heart-border { z-index: 2; }
-.dream-heart-wing {
-  position: absolute; z-index: 0; top: 5%; width: 52%;
-  pointer-events: none; filter: drop-shadow(0 3px 8px #8c78452b);
-}
-.dream-heart-wing-left { left: -36%; }
-.dream-heart-wing-right { right: -36%; transform: scaleX(-1); }
-.dream-heart-wing svg {
-  display: block; width: 100%; overflow: visible;
-  transform-origin: 94% 80%; animation: heart-wing-breathe 6s ease-in-out infinite alternate;
-}
-.dream-wing-feathers { fill: #fff9e9; fill-opacity: .92; stroke: #c5ab6c; stroke-width: 1.5; stroke-linejoin: round; }
-.dream-wing-details { fill: none; stroke: #c8b580; stroke-opacity: .7; stroke-width: 1.2; stroke-linecap: round; }
-@keyframes heart-wing-breathe { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
-@media (max-width: 767px) {
-  .dream-heart-wing { top: -2%; width: 31%; }
-  .dream-heart-wing-left { left: -1%; }
-  .dream-heart-wing-right { right: -1%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .dream-heart-wing svg { animation: none; }
-}
 .dream-heart-glint { stroke: #fff4c8; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 34 966; filter: drop-shadow(0 0 4px #fff6cd); animation: heart-glint-travel 7s linear infinite; vector-effect: non-scaling-stroke; }
 .dream-portrait-frame::before, .dream-portrait-frame::after {
   content: "✦"; position: absolute; z-index: 3; pointer-events: none;

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { attendanceSides } from "@/config/attendance";
 import { isRateLimited, recordFailedAttempt } from "@/server/auth/rate-limit";
 
 export const runtime = "nodejs";
@@ -8,6 +9,7 @@ const responseSchema = z.object({
   attendance: z.enum(["yes", "no"]),
   name: z.string().trim().min(2).max(120),
   phone: z.string().trim().min(6).max(40).regex(/^[+\d\s().-]+$/),
+  side: z.enum(attendanceSides),
   message: z.string().trim().max(1000),
 });
 
@@ -30,16 +32,16 @@ export async function POST(request: Request) {
     input = JSON.parse(raw);
   } catch { return error("Réponse invalide.", 400); }
   const parsed = responseSchema.safeParse(input);
-  if (!parsed.success) return error("Vérifiez votre nom, votre téléphone et votre message.", 400);
+  if (!parsed.success) return error("Vérifiez votre nom, votre téléphone, votre côté et votre message.", 400);
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return error("Les confirmations en ligne ne sont pas encore ouvertes. Merci de réessayer plus tard.", 503);
-  const { name, phone, attendance, message } = parsed.data;
+  const { name, phone, attendance, side, message } = parsed.data;
   try {
     const result = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: `Mariage Ange & Cédric — Réponse invité\n\nNom : ${name}\nTéléphone : ${phone}\nPrésence : ${attendance === "yes" ? "Oui, avec plaisir" : "Non"}\n\nMessage : ${message || "—"}`, link_preview_options: { is_disabled: true } }),
+      body: JSON.stringify({ chat_id: chatId, text: `Mariage Ange & Cédric — Réponse invité\n\nNom : ${name}\nTéléphone : ${phone}\nPrésence : ${attendance === "yes" ? "Oui, avec plaisir" : "Non"}\nCôté : ${side}\n\nMessage : ${message || "—"}`, link_preview_options: { is_disabled: true } }),
       signal: AbortSignal.timeout(10000),
     });
     const body = await result.json();

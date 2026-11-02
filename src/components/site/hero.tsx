@@ -46,17 +46,6 @@ export function Hero() {
         <Reveal as="figure" className="dream-portrait hero-portrait-reveal">
           <div className="dream-portrait-halo" aria-hidden="true" />
           <div className="dream-portrait-frame">
-            {(["left", "right"] as const).map(side => (
-              <div key={side} className={`dream-heart-wing dream-heart-wing-${side}`} aria-hidden="true">
-                <svg viewBox="0 0 160 260" focusable="false">
-                  <path className="dream-wing-feathers" d="M150 200C120 118 65 40 15 10C8 58 14 95 43 133C25 118 12 95 3 73C1 126 28 164 62 183C35 173 18 159 7 143C12 191 50 220 91 228C70 228 50 223 35 216C69 251 120 251 150 200Z" />
-                  <g className="dream-wing-details">
-                    <path d="M150 200C107 157 48 83 15 10M143 209C100 184 53 149 27 106M132 221C92 211 59 193 35 170M115 233C87 231 62 225 44 218" />
-                    <path d="M143 209C130 158 104 105 67 66M132 221C111 179 80 145 43 133M115 233C101 211 83 196 62 183" />
-                  </g>
-                </svg>
-              </div>
-            ))}
             <div className="dream-orbit" aria-label="Photos souvenirs en cercle autour du portrait">
               {home.memories.map((memory, i) => (
                 <div className="dream-orbit-slot" key={memory} style={{ "--orbit-angle": `${i * 360 / home.memories.length}deg` } as CSSProperties}>

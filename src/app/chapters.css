@@ -142,7 +142,7 @@
 .day-program { padding: 75px 40px; background: #f4f2e7; }
 .program-heading { text-align: center; }
 .provisional-label { display: inline-block; font-size: 10px; padding: 8px 14px; border: 1px solid #b5965870; border-radius: 20px; color: #7b6537; background: #fffdf580; }
-.program-steps { position: relative; display: grid; grid-template-columns: repeat(5,1fr); gap: 28px; max-width: 1140px; margin: 55px auto 10px; }
+.program-steps { position: relative; display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; max-width: 1140px; margin: 55px auto 10px; }
 .program-steps::before { content: ""; height: 1px; position: absolute; left: 10%; right: 10%; top: 29px; background: #b5965870; }
 .program-steps li { position: relative; text-align: center; }
 .program-icon { display: grid; place-items: center; margin: 0 auto 24px; background: #fdfbf5; width: 58px; height: 58px; border: 1px solid #b5965880; border-radius: 50%; color: #9a8046; font-size: 25px; }
@@ -520,9 +520,9 @@ html:has(.motion-paused) { scroll-behavior: auto; }
 .attendance-choices label:has(:checked) { background: #e7eddf; border-color: #657d58; }
 .attendance-choices input { accent-color: #657d58; }
 .attendance-form > label { display: block; margin-top: 18px; }
-.attendance-form input:not([type=radio]),.attendance-form textarea { display: block; width: 100%; padding: 13px 15px; margin-top: 8px; border: 1px solid #ccd2c1; border-radius: 12px; background: #fff; color: #30432f; font: inherit; }
+.attendance-form input:not([type=radio]),.attendance-form textarea,.attendance-form select { display: block; width: 100%; padding: 13px 15px; margin-top: 8px; border: 1px solid #ccd2c1; border-radius: 12px; background: #fff; color: #30432f; font: inherit; }
 .attendance-form textarea { resize: vertical; }
-.attendance-form :is(input,textarea,button):focus-visible { outline: 2px solid #9c7c3f; outline-offset: 3px; }
+.attendance-form :is(input,textarea,select,button):focus-visible { outline: 2px solid #9c7c3f; outline-offset: 3px; }
 .attendance-form button { width: 100%; margin-top: 25px; padding: 15px 20px; border-radius: 30px; background: linear-gradient(110deg,#53664e,#738366); color: #fff8df; font-size: 14px; cursor: pointer; }
 .attendance-form button span { margin-left: 15px; }
 .attendance-review { color: #40523b; font-size: 14px; line-height: 1.8; overflow-wrap: anywhere; }
@@ -539,14 +539,46 @@ html:has(.motion-paused) { scroll-behavior: auto; }
   .attendance-choices { grid-template-columns: 1fr; }
 }
 
-/* Conserver les deux visages et la vignette de l’appel de prière. */
-#histoire-05 .story-album-grid > :first-child .photo-open { aspect-ratio: 739/1600; border-radius: 0; mask-image: linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 6%,#000 94%,transparent); mask-composite: intersect; }
-#histoire-05 .story-album-grid > :first-child .photo-open img { object-fit: contain; }
-#histoire-05 .story-album-grid > :first-child .photo-open:hover img { transform: none; }
-#histoire-05 .story-album-grid { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); align-items: center; gap: 0; overflow: visible; }
-#histoire-05 .story-album-grid > :first-child { grid-column: 1 / 7; grid-row: 1; margin: 0; min-width: 0; z-index: 2; }
-#histoire-05 .story-album-grid > :nth-child(2) { grid-column: 4 / 13; grid-row: 1; margin: 0; min-width: 0; z-index: 1; }
-#histoire-05 .story-album-grid > :first-child .photo-open { height: clamp(280px,32vw,430px); width: auto; max-width: 100%; margin-inline: auto; }
-#histoire-05 .story-album-grid > :nth-child(2) .photo-open { height: clamp(250px,28.5vw,383px); }
-#histoire-05 .story-album-grid > :first-child > figcaption { display: none; }
-#histoire-05 .story-swipe-hint { display: none; }
+/* Les deux appels côte à côte, avec des contours fondus. */
+.story-prayer-images { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: 12px; max-width: 480px; margin-inline: auto; }
+.story-prayer-images > .photo-memory { grid-row: 1; min-width: 0; margin: 0; }
+.story-prayer-images > .photo-memory > figcaption { display: none; }
+.story-album .story-prayer-images .photo-open {
+  aspect-ratio: 739 / 1600;
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 6%, #000 94%, transparent);
+  mask-composite: intersect;
+}
+.story-album .story-prayer-images .photo-open img { object-fit: contain; }
+.story-prayer-images .photo-open:hover img { transform: none; }
+.story-prayer-caption { margin: 18px 0 0; text-align: center; font-family: var(--font-pinyon); font-size: clamp(27px, 2.5vw, 36px); line-height: 1.5; color: #fffaf0; text-shadow: 0 1px 5px #000b; }
+@media (max-width: 767px) {
+  .story-prayer-caption { margin-top: 28px; margin-bottom: 16px; }
+}
+
+#histoire-06 .story-scene-description { white-space: pre-line; }
+
+/* Légendes des quatre souvenirs : une italique élégante et lisible. */
+.story-album .story-video-constellation .photo-memory > figcaption { margin-top: -8px; padding: 4px 6px; }
+.story-album .story-video-constellation .photo-memory > figcaption > span {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #fff4d8;
+  text-shadow: 0 2px 4px #172211, 0 0 12px #172211cc;
+}
+@media (max-width: 767px) {
+  .story-album .story-video-constellation .photo-memory > figcaption > span { font-size: 20px; }
+}
+
+/* Les légendes du haut restent au-dessus des photos, hors de la vidéo. */
+.story-video-constellation .story-orbit-memory-1 { top: 44px; }
+.story-video-constellation .story-orbit-memory-2 { top: 54px; }
+.story-album .story-video-constellation :is(.story-orbit-memory-1, .story-orbit-memory-2) .photo-memory > figcaption {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  margin: 0 0 8px;
+}

@@ -33,14 +33,14 @@ export function OurStory() {
         <Petals gentle />
       </div>
     </div>
-    <ChapterHeading id="story-title" eyebrow="Chapitre I · Notre histoire" title="Un chemin," accent="notre chemin." text="Des premiers pas à ce grand oui, voici les étapes qui nous ont menés jusqu’ici." />
+    <ChapterHeading id="story-title" eyebrow="Chapitre I · Là où tout a commencé" title="Deux cœurs," accent="un même destin." text="« De nos premiers regards à la promesse d’une vie à deux, chaque instant nous a rapprochés de ce que Dieu avait prévu pour nous. »" />
     <div className="story-albums">
       <svg className="story-golden-path" viewBox="0 0 100 1200" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M50 0C5 100 95 140 50 220S5 350 50 420S95 550 50 620S5 750 50 820S95 950 50 1020S5 1140 50 1200" /></svg>
       {chapters.map(chapter => <div id={`histoire-${chapter.number}`} className="story-album" key={chapter.number}>
         <Reveal className="story-album-heading">
           <span className="story-album-number" aria-hidden="true">{chapter.number}</span>
-          <p className="home-eyebrow">{chapter.tag}</p>
-          <h3>{chapter.title}</h3>
+          {chapter.tag && <p className="home-eyebrow">{chapter.tag}</p>}
+          {chapter.title && <h3>{chapter.title}</h3>}
           <div className="story-scene-flourish" aria-hidden="true">✧</div>
           <p className="story-scene-description"><span className="story-desktop-text">{chapter.text}</span><span className="story-mobile-text">{chapter.mobileText}</span></p>
           {chapter.number === "06" && <a className="text-link" href="#grand-jour">Découvrir le grand jour <span aria-hidden="true">↗</span></a>}
@@ -48,7 +48,12 @@ export function OurStory() {
         <Reveal className="story-album-media">
           {chapter.number === "02" ? <div className="story-video-constellation">
             <StoryVideo />
-            {[photos.momentsDouala, photos.momentsTogether, photos.momentsSofa, photos.momentsEmbrace].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={photo} caption={index === 0 ? "À Douala, ensemble" : index === 1 ? "Un instant à deux" : index === 2 ? "Tout simplement nous" : "Dans tes bras"} sizes="(max-width: 767px) 38vw, 220px" /></div>)}
+            {[photos.momentsDouala, photos.momentsTogether, photos.momentsSofa, photos.momentsEmbrace].map((photo, index) => <div key={index} className={`story-orbit-memory story-orbit-memory-${index + 1}`}><PhotoMemory photo={photo} caption={index === 0 ? "Rien que nous deux" : index === 1 ? "Juste toi et moi" : index === 2 ? "Nos doux débuts" : "Nos instants précieux"} sizes="(max-width: 767px) 38vw, 220px" /></div>)}
+          </div> : chapter.number === "05" ? <div className="story-prayer-triptych">
+            <div className="story-prayer-images" role="group" aria-label="Nos prières et nos conversations à distance">
+              {chapter.media.map(item => item.kind === "image" && <PhotoMemory key={item.photo.src} photo={item.photo} caption="" sizes="(max-width: 767px) 35vw, 240px" />)}
+            </div>
+            {chapter.aside && <p className="story-prayer-caption">{chapter.aside}</p>}
           </div> : chapter.number !== "04" ? <StoryGallery media={chapter.media} caption={chapter.aside} /> : <div className="distance-map" aria-label="Cédric part au Canada, puis Ange en France un an plus tard">
             <div className="distance-map-stars" aria-hidden="true">✦<span>✧</span>✦</div>
             <p className="home-eyebrow">Notre amour voyage</p>
@@ -96,8 +101,8 @@ export function WeddingDay() {
       <div className="day-cover-content"><p className="home-eyebrow">Chapitre III · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><a className="calendar-button" href="/mariage-ange-cedric.ics" download>Enregistrer la date <span aria-hidden="true">↗</span></a></div>
     </div>
     <div id="programme" className="day-program">
-      <Reveal className="program-heading"><p className="home-eyebrow">Les moments de la journée</p><h3>Du premier regard<br /><em>à la dernière danse.</em></h3><span className="provisional-label">Programme prévisionnel · horaires à confirmer</span></Reveal>
-      <ol className="program-steps">{wedding.program.map((step,i) => <Reveal key={step.time} as="li" delay={i * 70}><span className="program-icon" aria-hidden="true">{["♧","✧","♡","◇","♫"][i]}</span><span className="program-time">{step.time}</span><h4>{step.title}</h4><p>{step.description}</p></Reveal>)}</ol>
+      <Reveal className="program-heading"><p className="home-eyebrow">Les moments de la journée</p><h3>Du premier regard<br /><em>à la dernière danse.</em></h3></Reveal>
+      <ol className="program-steps">{wedding.program.map((step,i) => <Reveal key={step.time} as="li" delay={i * 70}><span className="program-icon" aria-hidden="true">{["♧","✧","♡","♫"][i]}</span><span className="program-time">{step.time}</span><h4>{step.title}</h4><p>{step.description}</p></Reveal>)}</ol>
     </div>
     <section id="dress-code" className="dress-theme" aria-labelledby="dress-title">
       <Petals gentle />
@@ -108,7 +113,6 @@ export function WeddingDay() {
           <div className="palette-swatches">{[{name:"Vert sauge",hex:"#a3b39a"},{name:"Blanc",hex:"#fffdf7"},{name:"Or",hex:"#b59658"}].map(color => <div key={color.name}><span style={{background:color.hex}} /><p>{color.name}</p></div>)}</div>
           <p className="dress-invitation">Des nuances douces, une touche d’or et le plaisir de célébrer ensemble. Venez élégants, venez vous-mêmes.</p>
           <p className="dress-signature">Une harmonie qui nous ressemble.</p>
-          <p className="dress-note"><strong>Dress code proposé :</strong> tenue de soirée ou tenue traditionnelle élégante. Les consignes définitives, notamment concernant le blanc, restent à confirmer.</p>
         </Reveal>
         <Reveal className="dress-theme-visual" delay={160}>
           <Image src="/images/generated/tenues-soiree-sauge.png" alt="Inspiration de tenues de soirée : costume sauge pour homme et robe satinée sauge avec accessoires dorés pour femme" width={1122} height={1402} sizes="(max-width: 767px) 90vw, 45vw" />
