@@ -209,11 +209,11 @@ export const wedding = {
 
   /** Métadonnées du site */
   meta: {
-    title: "Ange & Cédric — 26 décembre 2026",
+    title: "Mariage Ange & Cédric — 26 décembre 2026 à Douala",
     description:
       "Ange et Cédric se marient le 26 décembre 2026 à Douala. Découvrez notre histoire, notre famille, notre foi et les informations du grand jour.",
     /** URL de production (utilisée pour les QR codes et liens absolus) */
-    siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+    siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://angedecedric.com",
   },
 } as const;
 

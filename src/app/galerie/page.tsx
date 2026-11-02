@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
-/** Redirige vers la section Galerie de la landing page. */
+/** Les photos sont désormais intégrées aux chapitres de notre histoire. */
 export default function GaleriePage() {
-  redirect("/#galerie");
+  permanentRedirect("/#histoire");
 }

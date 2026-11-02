@@ -394,14 +394,10 @@
 .dream-portrait-frame { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .dream-photo { border-radius: 0; background: transparent; mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 58%, #000d 72%, transparent 100%); }
 
-/* Portrait central au plus grand format compatible avec les deux versets. */
+/* Les grands formats du portrait sont réservés au téléphone. */
 @media (min-width: 1101px) {
-  .dream-portrait { width: min(40vw, 560px); margin-top: 70px; }
   .dream-orbit { width: calc(100% + 32px); }
   .dream-orbit-counter { width: 82px; height: 82px; }
-}
-@media (min-width: 768px) and (max-width: 1100px) {
-  .dream-portrait { width: min(62vw, 560px); }
 }
 @media (max-width: 767px) {
   .dream-portrait { width: min(94vw, max(185px, calc((100svh - 300px) * .8)), 440px); margin-top: 10px; margin-bottom: 6px; }
@@ -417,22 +413,93 @@
   .home-header .home-menu-button { display: none; }
 }
 
-/* Portrait en arche, souligné d’ivoire et d’or. */
+/* Portrait en cœur, souligné d’or. */
 .dream-orbit { display: none; }
-.dream-portrait-frame { padding: 4px; border: 2px solid #fff9e9; border-radius: 50% 50% 6px 6px / 40% 40% 6px 6px; background: #b59658; box-shadow: 0 0 0 1px #b5965899, 0 15px 45px #39452b26; }
-.dream-photo { border-radius: inherit; mask-image: none; background: #d3d0c9; }
-.dream-couple-photo { transform: none; object-position: center; }
+.dream-portrait-frame { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.dream-photo {
+  border-radius: 0;
+  background: transparent;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Cpath d='M200 90C128-10 8 8 8 122C8 258 120 367 200 478C280 367 392 258 392 122C392 8 272-10 200 90Z'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+.dream-couple-photo { transform: translateY(7%) scale(.95); object-position: center; }
 .dream-portrait .dream-faith-signature { margin-top: 18px; }
 @media (max-width: 767px) {
-  .dream-portrait-frame { padding: 3px; }
   .dream-portrait .dream-faith-signature { margin-top: 16px; }
 }
 
-/* Le portrait détouré laisse apparaître le jardin à travers l’arche. */
-.dream-portrait-frame, .dream-photo { background: transparent; }
+.dream-heart-border { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; fill: none; filter: drop-shadow(0 1px 3px #97752a55); }
+.dream-heart-gold { stroke: #c4a04c; stroke-width: 3; vector-effect: non-scaling-stroke; }
+.dream-portrait-frame { isolation: isolate; }
+.dream-photo { z-index: 1; }
+.dream-heart-border { z-index: 2; }
+.dream-heart-wing {
+  position: absolute; z-index: 0; top: 5%; width: 52%;
+  pointer-events: none; filter: drop-shadow(0 3px 8px #8c78452b);
+}
+.dream-heart-wing-left { left: -36%; }
+.dream-heart-wing-right { right: -36%; transform: scaleX(-1); }
+.dream-heart-wing svg {
+  display: block; width: 100%; overflow: visible;
+  transform-origin: 94% 80%; animation: heart-wing-breathe 6s ease-in-out infinite alternate;
+}
+.dream-wing-feathers { fill: #fff9e9; fill-opacity: .92; stroke: #c5ab6c; stroke-width: 1.5; stroke-linejoin: round; }
+.dream-wing-details { fill: none; stroke: #c8b580; stroke-opacity: .7; stroke-width: 1.2; stroke-linecap: round; }
+@keyframes heart-wing-breathe { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@media (max-width: 767px) {
+  .dream-heart-wing { top: -2%; width: 31%; }
+  .dream-heart-wing-left { left: -1%; }
+  .dream-heart-wing-right { right: -1%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dream-heart-wing svg { animation: none; }
+}
+.dream-heart-glint { stroke: #fff4c8; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 34 966; filter: drop-shadow(0 0 4px #fff6cd); animation: heart-glint-travel 7s linear infinite; vector-effect: non-scaling-stroke; }
+.dream-portrait-frame::before, .dream-portrait-frame::after {
+  content: "✦"; position: absolute; z-index: 3; pointer-events: none;
+  color: #fff2bd; font-size: clamp(17px, 2.2vw, 26px); line-height: 1;
+  text-shadow: 0 0 5px #b38a38, 0 0 12px #fff5cc;
+  animation: heart-star-shimmer 4.8s ease-in-out infinite;
+}
+.dream-portrait-frame::before { left: 1%; top: 30%; }
+.dream-portrait-frame::after { right: 2%; top: 37%; animation-delay: -2.4s; }
+@keyframes heart-glint-travel { to { stroke-dashoffset: -1000; } }
+@keyframes heart-star-shimmer {
+  0%, 100% { opacity: .25; transform: scale(.65) rotate(-12deg); }
+  50% { opacity: 1; transform: scale(1.15) rotate(12deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dream-heart-glint { animation: none; }
+  .dream-portrait-frame::before, .dream-portrait-frame::after { animation: none; opacity: .65; }
+}
 
-/* Encadrement doré du portrait central, dessiné uniquement en CSS. */
-.dream-portrait-frame {
-  border: 3px solid #b38a38;
-  box-shadow: 0 0 0 1px #f5e2a6, inset 0 0 0 1px #f5e2a6, 0 12px 35px #80612626;
+/* Sur ordinateur, toute la scène tient sous la navigation, jusqu’au bouton. */
+@media (min-width: 768px) {
+  .dream-stage {
+    min-height: calc(100svh - 88px);
+    padding: 12px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  .dream-heading { margin: 0; }
+  .dream-chapter-signature > span { font-size: 16px; }
+  .dream-chapter-signature > em { font-size: clamp(32px, 5svh, 48px); }
+  .dream-signature-flourish { margin-top: 4px; font-size: 15px; }
+  .dream-portrait {
+    width: min(32vw, max(100px, calc((100svh - 430px) * .8)), 400px);
+    margin: 0 auto;
+  }
+  .dream-portrait .dream-faith-signature { margin: 8px -40px 0; padding: 4px 12px 0; }
+  .dream-faith-signature strong { margin-top: 3px; font-size: clamp(30px, 4.8svh, 44px); }
+  .dream-faith-signature .faith-signature-rule { margin-top: 5px; font-size: 12px; }
+  .dream-event { margin: 0 auto; }
+  .dream-event-details { padding: 8px 16px; }
+  .dream-event .home-button { margin-top: 10px; padding: 10px 22px; }
+  .dream-scripture { position: absolute; top: 50%; translate: 0 -50%; width: min(25vw, 310px); margin: 0; }
+  .dream-announcement { left: max(20px, calc(50% - 600px)); }
+  .dream-blessing { right: max(20px, calc(50% - 600px)); }
+  .dream-scripture blockquote p { font-size: clamp(19px, 2.7svh, 28px); }
 }

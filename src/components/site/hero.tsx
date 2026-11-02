@@ -46,6 +46,17 @@ export function Hero() {
         <Reveal as="figure" className="dream-portrait hero-portrait-reveal">
           <div className="dream-portrait-halo" aria-hidden="true" />
           <div className="dream-portrait-frame">
+            {(["left", "right"] as const).map(side => (
+              <div key={side} className={`dream-heart-wing dream-heart-wing-${side}`} aria-hidden="true">
+                <svg viewBox="0 0 160 260" focusable="false">
+                  <path className="dream-wing-feathers" d="M150 200C120 118 65 40 15 10C8 58 14 95 43 133C25 118 12 95 3 73C1 126 28 164 62 183C35 173 18 159 7 143C12 191 50 220 91 228C70 228 50 223 35 216C69 251 120 251 150 200Z" />
+                  <g className="dream-wing-details">
+                    <path d="M150 200C107 157 48 83 15 10M143 209C100 184 53 149 27 106M132 221C92 211 59 193 35 170M115 233C87 231 62 225 44 218" />
+                    <path d="M143 209C130 158 104 105 67 66M132 221C111 179 80 145 43 133M115 233C101 211 83 196 62 183" />
+                  </g>
+                </svg>
+              </div>
+            ))}
             <div className="dream-orbit" aria-label="Photos souvenirs en cercle autour du portrait">
               {home.memories.map((memory, i) => (
                 <div className="dream-orbit-slot" key={memory} style={{ "--orbit-angle": `${i * 360 / home.memories.length}deg` } as CSSProperties}>
@@ -58,8 +69,12 @@ export function Hero() {
               ))}
             </div>
             <div className="dream-photo">
-              <Image src={home.portrait.src} alt={home.portrait.alt} fill sizes="(max-width: 767px) 58vw, 340px" preload className="dream-couple-photo" />
+              <Image src={home.portrait.src} alt={home.portrait.alt} fill sizes="(max-width: 767px) 94vw, (max-width: 1250px) 32vw, 400px" preload className="dream-couple-photo" />
             </div>
+            <svg className="dream-heart-border" viewBox="0 0 400 500" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path className="dream-heart-gold" d="M200 90C128-10 8 8 8 122C8 258 120 367 200 478C280 367 392 258 392 122C392 8 272-10 200 90Z" />
+              <path className="dream-heart-glint" pathLength="1000" d="M200 90C128-10 8 8 8 122C8 258 120 367 200 478C280 367 392 258 392 122C392 8 272-10 200 90Z" />
+            </svg>
           </div>
           <figcaption className="dream-faith-signature"><span className="faith-signature-intro">Unis par l’amour,</span><strong>guidés par Dieu.</strong><span className="faith-signature-rule" aria-hidden="true">✧</span></figcaption>
         </Reveal>

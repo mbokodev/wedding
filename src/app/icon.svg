@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Ange et Cédric</title>
+  <defs>
+    <linearGradient id="sage" x2="1" y2="1"><stop stop-color="#75866b"/><stop offset="1" stop-color="#485e43"/></linearGradient>
+    <linearGradient id="gold" x2="0.8" y2="1"><stop stop-color="#fff0b6"/><stop offset="1" stop-color="#d9b665"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#sage)"/>
+  <circle cx="256" cy="256" r="211" fill="none" stroke="#e8cd88" stroke-width="7"/>
+  <g fill="url(#gold)">
+    <path fill-rule="evenodd" d="M88 326v-10h19l68-174h18l64 174h18v10h-75v-10h21l-18-49h-65l-18 49h23v10zm55-73h55l-27-75z"/>
+    <path d="M413 151v54h-11c-7-32-23-49-47-49-36 0-57 30-57 78 0 50 22 80 58 80 25 0 43-16 55-44l12 5c-13 37-39 57-73 57-52 0-87-39-87-98 0-56 35-94 88-94 21 0 37 6 49 17l5-6z"/>
+    <path d="M256 405c-20-16-46-34-46-54 0-21 29-29 46-8 17-21 46-13 46 8 0 20-26 38-46 54z"/>
+  </g>
+</svg>

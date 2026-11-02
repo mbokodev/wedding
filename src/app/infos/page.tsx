@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
-/** Redirige vers la section Informations pratiques de la landing page. */
+/** Les informations de la journée sont regroupées dans Le grand jour. */
 export default function InfosPage() {
-  redirect("/#infos");
+  permanentRedirect("/#grand-jour");
 }

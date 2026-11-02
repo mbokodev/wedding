@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { wedding } from "@/config/wedding";
+import { isPreview, siteUrl, socialImage } from "@/config/seo";
 import "./globals.css";
 
 const cormorant = localFont({
@@ -27,12 +28,31 @@ const pinyon = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: wedding.meta.title,
     template: `%s — ${wedding.couple.displayName}`,
   },
   description: wedding.meta.description,
+  applicationName: "Ange & Cédric",
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Ange & Cédric",
+    title: wedding.meta.title,
+    description: wedding.meta.description,
+    images: [socialImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: wedding.meta.title,
+    description: wedding.meta.description,
+    images: [socialImage],
+  },
+  robots: isPreview ? { index: false, follow: false } : { index: true, follow: true },
 };
+
+export const viewport: Viewport = { themeColor: "#53664e" };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
