@@ -46,6 +46,9 @@ async function nextReference(): Promise<string> {
 }
 
 async function main() {
+  if (process.env.NODE_ENV === "production" || process.env.VERCEL) {
+    throw new Error("Le seed de démonstration est interdit en production. Utilisez pnpm db:bootstrap.");
+  }
   console.log("— Nettoyage des tables…");
   await db.checkIn.deleteMany();
   await db.ticket.deleteMany();

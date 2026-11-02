@@ -35,7 +35,7 @@ ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV DATABASE_URL="postgresql://build:build@localhost:5432/build"
 
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN pnpm prisma generate && pnpm build
+RUN pnpm build
 
 # ---------- Étape 3 : image finale ----------
 FROM node:24-alpine AS runner

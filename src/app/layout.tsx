@@ -1,25 +1,29 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost, Pinyon_Script } from "next/font/google";
+import localFont from "next/font/local";
 import { wedding } from "@/config/wedding";
 import "./globals.css";
 
-const cormorant = Cormorant_Garamond({
+const cormorant = localFont({
   variable: "--font-cormorant",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  style: ["normal", "italic"],
+  src: [
+    { path: "./fonts/CormorantGaramond[wght].ttf", weight: "300 700", style: "normal" },
+    { path: "./fonts/CormorantGaramond-Italic[wght].ttf", weight: "300 700", style: "italic" },
+  ],
+  display: "swap",
 });
 
-const jost = Jost({
+const jost = localFont({
   variable: "--font-jost",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  src: "./fonts/Jost[wght].ttf",
+  weight: "100 900",
+  display: "swap",
 });
 
-const pinyon = Pinyon_Script({
+const pinyon = localFont({
   variable: "--font-pinyon",
-  subsets: ["latin"],
+  src: "./fonts/PinyonScript-Regular.ttf",
   weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {

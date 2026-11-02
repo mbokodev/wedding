@@ -1,6 +1,9 @@
 import { z } from "zod";
 import { isRateLimited, recordFailedAttempt } from "@/server/auth/rate-limit";
 
+export const runtime = "nodejs";
+export const maxDuration = 30;
+
 const responseSchema = z.object({
   attendance: z.enum(["yes", "no"]),
   name: z.string().trim().min(2).max(120),
@@ -11,8 +14,12 @@ const responseSchema = z.object({
 export async function POST(request: Request) {
   const error = (message: string, status: number) => Response.json({ error: message }, { status });
   const origin = request.headers.get("origin");
-  const allowedOrigin = process.env.NEXT_PUBLIC_SITE_URL ? new URL(process.env.NEXT_PUBLIC_SITE_URL).origin : new URL(request.url).origin;
-  if (!origin || origin !== allowedOrigin) return error("Origine non autorisée.", 403);
+  const allowedOrigins = new Set([
+    process.env.NEXT_PUBLIC_SITE_URL ? new URL(process.env.NEXT_PUBLIC_SITE_URL).origin : new URL(request.url).origin,
+    ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
+    ...(process.env.VERCEL_BRANCH_URL ? [`https://${process.env.VERCEL_BRANCH_URL}`] : []),
+  ]);
+  if (!origin || !allowedOrigins.has(origin)) return error("Origine non autorisée.", 403);
   const key = `rsvp:${request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"}`;
   if (isRateLimited(key)) return error("Merci de patienter avant de réessayer.", 429);
   recordFailedAttempt(key);

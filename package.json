@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
@@ -15,6 +15,7 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
+    "db:bootstrap": "tsx prisma/bootstrap.ts",
     "db:studio": "prisma studio"
   },
   "dependencies": {
@@ -46,5 +47,6 @@
     "tsx": "^4.23.13",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.18.0"
+  "packageManager": "pnpm@10.18.0",
+  "engines": { "node": "24.x" }
 }
