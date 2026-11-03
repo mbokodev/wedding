@@ -3,6 +3,7 @@ import { wedding } from "@/config/wedding";
 import { siteUrl, socialImage } from "@/config/seo";
 import { SiteHeader } from "@/components/site/site-header";
 import { Hero } from "@/components/site/hero";
+import { MusicToggle } from "@/components/site/music-toggle";
 import { WeddingExperience } from "@/components/site/wedding-experience";
 import { LoveRibbon, OurStory, OurFamily, WeddingDay, AttendanceSection, WeddingFooter } from "@/components/site/public-sections";
 import "./home.css";
@@ -40,5 +41,6 @@ export default function HomePage() {
       <AttendanceSection />
     </main>
     <WeddingFooter />
+    <MusicToggle />
   </WeddingExperience>;
 }

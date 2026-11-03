@@ -655,3 +655,14 @@ html:has(.motion-paused) { scroll-behavior: auto; }
   .calendar-options { grid-template-columns: 1fr; gap: 10px; }
   .calendar-options a { padding: 12px; }
 }
+
+/* Musique d'ambiance : contrôle fixe, halo doré pendant la lecture. */
+.wedding-home .music-toggle { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 90; display: grid; place-items: center; width: 48px; height: 48px; padding: 12px; border: 1px solid #d4b06a; border-radius: 50%; background: #fffdf6; color: #53684c; box-shadow: 0 4px 20px #23321f30; cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform .15s, background .2s; }
+.wedding-home .music-toggle svg { width: 24px; height: 24px; }
+.wedding-home .music-toggle::before { content: ""; position: absolute; inset: -4px; border-radius: inherit; }
+.wedding-home .music-toggle.is-playing { background: linear-gradient(135deg, #f5e6b3, #d4b06a); color: #34442e; }
+.wedding-home .music-toggle.is-playing::before { pointer-events: none; animation: wedding-music-halo 1.8s ease-out infinite; }
+.wedding-home .music-toggle:active { transform: scale(.92); }
+.wedding-home .music-toggle:focus-visible { outline: 3px solid #53684c; outline-offset: 5px; }
+@keyframes wedding-music-halo { from { box-shadow: 0 0 0 0 #d4b06a80; } to { box-shadow: 0 0 0 13px #d4b06a00; } }
+@media (prefers-reduced-motion: reduce) { .wedding-home .music-toggle.is-playing::before { animation: none; } }
