@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CalendarDialog } from "@/components/site/calendar-dialog";
 import { AttendanceForm } from "@/components/site/attendance-form";
 import { wedding } from "@/config/wedding";
 import { home } from "@/config/home";
@@ -97,7 +98,7 @@ export function WeddingDay() {
     <div className="day-cover">
       <Image src={photos.reception.src} alt={photos.reception.alt} fill sizes="100vw" />
       <div className="day-cover-shade" />
-      <div className="day-cover-content"><p className="home-eyebrow">Chapitre III · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><a className="calendar-button" href="/mariage-ange-cedric.ics" download>Enregistrer la date <span aria-hidden="true">↗</span></a></div>
+      <div className="day-cover-content"><p className="home-eyebrow">Chapitre III · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><CalendarDialog /></div>
     </div>
     <div id="programme" className="day-program">
       <Reveal className="program-heading"><p className="home-eyebrow">Les moments de la journée</p><h3>Du premier regard<br /><em>à la dernière danse.</em></h3></Reveal>

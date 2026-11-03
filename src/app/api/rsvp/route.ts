@@ -33,6 +33,30 @@ export async function POST(request: Request) {
   } catch { return error("Réponse invalide.", 400); }
   const parsed = responseSchema.safeParse(input);
   if (!parsed.success) return error("Vérifiez votre nom, votre téléphone, votre côté et votre message.", 400);
+  const sheetsUrl = process.env.GOOGLE_SHEETS_RSVP_URL?.trim();
+  const sheetsSecret = process.env.GOOGLE_SHEETS_RSVP_SECRET?.trim();
+  // Dès que Sheets est configuré, il devient la destination des réponses.
+  // Une erreur Sheets ne doit pas être masquée par un envoi à Telegram.
+  if (sheetsUrl || sheetsSecret) {
+    if (!sheetsUrl || !sheetsSecret) return error("Les confirmations en ligne ne sont pas encore ouvertes. Merci de réessayer plus tard.", 503);
+    try {
+      const url = new URL(sheetsUrl);
+      if (url.origin !== "https://script.google.com" || !/^\/macros\/s\/[^/]+\/exec$/.test(url.pathname) || url.username || url.password) {
+        return error("Les confirmations en ligne ne sont pas encore ouvertes. Merci de réessayer plus tard.", 503);
+      }
+      const result = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...parsed.data, secret: sheetsSecret }),
+        signal: AbortSignal.timeout(20000),
+        cache: "no-store",
+        redirect: "follow",
+      });
+      const body = await result.json();
+      if (!result.ok || body?.ok !== true) return error("Votre réponse n’a pas pu être enregistrée. Merci de réessayer.", 502);
+      return Response.json({ ok: true });
+    } catch { return error("L’enregistrement n’a pas pu être confirmé. Merci de réessayer plus tard.", 502); }
+  }
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return error("Les confirmations en ligne ne sont pas encore ouvertes. Merci de réessayer plus tard.", 503);
