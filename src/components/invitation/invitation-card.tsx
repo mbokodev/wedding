@@ -1,120 +1,60 @@
 import Image from "next/image";
 import { wedding } from "@/config/wedding";
+import "./invitation-card.css";
 
-/** Ornement décoratif (feuillage doré stylisé). */
-function Ornament({ flipped = false }: { flipped?: boolean }) {
-  return (
-    <svg
-      width="120"
-      height="28"
-      viewBox="0 0 120 28"
-      fill="none"
-      aria-hidden
-      className={flipped ? "rotate-180" : undefined}
-    >
-      <path
-        d="M4 14h44m24 0h44"
-        stroke="#B08D57"
-        strokeOpacity="0.6"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-      <path
-        d="M60 6c-3 3-3 13 0 16 3-3 3-13 0-16z"
-        stroke="#B08D57"
-        strokeWidth="1"
-        fill="none"
-      />
-      <circle cx="52" cy="14" r="1.5" fill="#B08D57" fillOpacity="0.7" />
-      <circle cx="68" cy="14" r="1.5" fill="#B08D57" fillOpacity="0.7" />
-    </svg>
-  );
+export type InvitationCardProps = { guestName: string; guestCount: number; reference: string; qrDataUrl?: string };
+
+function HeartDivider() {
+  return <div className="evening-ticket-divider" aria-hidden="true"><span />♥<span /></div>;
 }
 
-export type InvitationCardProps = {
-  guestName: string;
-  guestCount: number;
-  reference: string;
-  qrDataUrl: string;
-};
-
-/**
- * Template de billet d'invitation.
- * Réutilisable pour l'affichage public et l'export depuis l'admin.
- */
-export function InvitationCard({
-  guestName,
-  guestCount,
-  reference,
-  qrDataUrl,
-}: InvitationCardProps) {
-  return (
-    <div className="relative border border-gold/50 bg-ivory p-2 shadow-[0_8px_40px_rgba(62,47,35,0.12)]">
-      <div className="border border-gold/30 px-6 py-10 md:px-10 md:py-12 text-center">
-        <p className="text-[10px] uppercase tracking-[0.35em] text-gold-dark">
-          Invitation
-        </p>
-
-        <div className="mt-6 flex justify-center">
-          <Ornament />
+/** Composition photographique du billet de soirée. */
+export function InvitationCard({ guestName, guestCount, reference, qrDataUrl }: InvitationCardProps) {
+  const couple = guestCount === 2;
+  const displayName = couple && !/^(m\.?\s*(&|et)\s*mme\.?|monsieur|famille)\b/i.test(guestName) ? `M. & Mme ${guestName}` : guestName;
+  return <article className="evening-ticket" aria-label={`Invitation à la soirée — ${displayName}`}>
+    <div className="evening-ticket-frame" aria-hidden="true" />
+    <div className="evening-ticket-portrait">
+      <Image src="/images/generated/ange-cedric-transparent.png" alt="Ange et Cédric, ensemble et vêtus de blanc" width={1024} height={1536} unoptimized />
+    </div>
+    <Image src="/images/generated/hero-floral-roses.png" width={300} height={300} alt="" unoptimized className="evening-ticket-flowers evening-ticket-flowers-top" />
+    <Image src="/images/generated/hero-floral-roses.png" width={300} height={300} alt="" unoptimized className="evening-ticket-flowers evening-ticket-flowers-bottom" />
+    <div className="evening-ticket-content">
+      <div className="evening-ticket-copy">
+        <HeartDivider />
+        <h1 className="evening-ticket-names">Ange Toyou<span>&amp;</span>Cédric Nampa</h1>
+        <p className="evening-ticket-motto">ont le bonheur de convier</p>
+        <div className="evening-ticket-guest">
+          <h2>{displayName}</h2>
         </div>
-
-        <h1 className="mt-6 font-script text-5xl md:text-6xl leading-tight text-cocoa">
-          {wedding.couple.partner1}
-          <span className="mx-2 text-gold">&amp;</span>
-          {wedding.couple.partner2}
-        </h1>
-
-        <p className="mx-auto mt-6 max-w-xs font-serif text-base md:text-lg font-light italic leading-relaxed text-cocoa-light">
-          {wedding.texts.invitationMessage}
-        </p>
-
-        {/* Invité */}
-        <div className="mt-8 bg-champagne-light/50 px-4 py-6">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-gold-dark">
-            Au nom de
-          </p>
-          <p className="mt-2 font-serif text-2xl md:text-3xl text-cocoa">
-            {guestName}
-          </p>
-          <p className="mt-2 text-sm font-light text-cocoa-light">
-            {guestCount} {guestCount > 1 ? "personnes" : "personne"}
-          </p>
+        <p className="evening-ticket-invitation-ending">à la soirée de célébration<br />de leur mariage.</p>
+        <HeartDivider />
+        <div className="evening-ticket-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M7 2v6m10-6v6M3 11h18M7 15h2m3 0h2m3 0h1M7 18h2m3 0h2" /></svg>
+          <div><p>Date &amp; heure</p><strong>{wedding.date.display}</strong><span>Samedi · À partir de 19 h</span></div>
         </div>
-
-        {/* Date & lieu */}
-        <div className="mt-8 space-y-1.5">
-          <p className="font-serif text-xl md:text-2xl tracking-[0.1em] text-cocoa">
-            {wedding.date.display}
-          </p>
-          <p className="text-xs uppercase tracking-[0.25em] text-cocoa-light">
-            {wedding.location.display}
-          </p>
+        <div className="evening-ticket-info evening-ticket-venue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>
+          <div><p>Salle de cérémonie</p><strong>Glorious Hall</strong><span>Douala · Bonamoussadi</span><span>À 100 m du Yapaki Prestige</span></div>
         </div>
-
-        <div className="mt-8 flex justify-center">
-          <Ornament flipped />
+        <HeartDivider />
+        <p className="evening-ticket-blessing">Venez avec amour</p>
+        <div className="evening-ticket-theme" aria-label="Couleurs du thème">
+          {[{ name: "Vert sauge", hex: "#a3b39a" }, { name: "Blanc", hex: "#fffdf7" }, { name: "Or", hex: "#b59658" }].map(color => (
+            <div key={color.name}><span style={{ background: color.hex }} /><p>{color.name}</p></div>
+          ))}
         </div>
-
-        {/* QR Code */}
-        <div className="mt-8 flex flex-col items-center">
-          <div className="border border-gold/40 bg-white p-3">
-            <Image
-              src={qrDataUrl}
-              alt={`QR code de l'invitation ${reference}`}
-              width={160}
-              height={160}
-              unoptimized
-            />
-          </div>
-          <p className="mt-3 text-[10px] uppercase tracking-[0.25em] text-cocoa-light">
-            À présenter le jour du mariage
-          </p>
-          <p className="mt-1 font-mono text-[11px] text-gold-dark">
-            {reference}
-          </p>
+        <p className="evening-ticket-signature">Votre présence rendra<br />ce jour encore plus précieux.</p>
+      </div>
+      <div className="evening-ticket-admission">
+        <div className="evening-ticket-qr">
+          <span className="evening-ticket-qr-corner top-left" aria-hidden="true" />
+          <span className="evening-ticket-qr-corner top-right" aria-hidden="true" />
+          <span className="evening-ticket-qr-corner bottom-left" aria-hidden="true" />
+          <span className="evening-ticket-qr-corner bottom-right" aria-hidden="true" />
+          {qrDataUrl ? <Image src={qrDataUrl} alt={`QR code de l’invitation ${reference}`} width={160} height={160} unoptimized /> : <div className="evening-ticket-qr-placeholder"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><path d="M3 9V3h6M15 3h6v6M21 15v6h-6M9 21H3v-6M8 8h2v2H8zM14 8h2v2h-2zM8 14h2v2H8zM14 14h2v2h-2z" /></svg><span>Espace QR code</span></div>}
         </div>
       </div>
     </div>
-  );
+  </article>;
 }

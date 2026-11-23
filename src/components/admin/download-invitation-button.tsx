@@ -40,7 +40,7 @@ export function DownloadableInvitation({
 
   return (
     <div className="space-y-6">
-      <div ref={cardRef} className="inline-block">
+      <div ref={cardRef} className="w-full">
         {children}
       </div>
       <div className="flex justify-center">

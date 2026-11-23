@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
 import type { TicketActionState } from "@/features/tickets/actions";
 
@@ -31,12 +31,26 @@ export function TicketForm({
   quotaRemaining?: number | null;
 }) {
   const [state, formAction, pending] = useActionState(action, initialState);
+  const [ticketType, setTicketType] = useState("simple");
 
   return (
     <form action={formAction} className="max-w-xl space-y-5">
+      {mode === "create" && (
+        <fieldset disabled={pending}>
+          <legend className={labelClass}>Type de billet</legend>
+          <div className="ticket-type-toggle">
+            {(["simple", "couple"] as const).map(type => (
+              <label key={type}>
+                <input type="radio" name="ticketType" value={type} checked={ticketType === type} onChange={() => setTicketType(type)} />
+                <span><strong>{type === "simple" ? "Billet simple" : "Billet couple"}</strong><small>{type === "simple" ? "1 personne" : "2 personnes"}</small></span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
       <div>
         <label htmlFor="guestName" className={labelClass}>
-          Nom de l&apos;invité / du groupe
+          {mode === "create" ? (ticketType === "couple" ? "Nom du couple" : "Nom de l’invité") : "Nom de l’invité / du groupe"}
         </label>
         <input
           id="guestName"
@@ -45,12 +59,13 @@ export function TicketForm({
           required
           autoFocus
           defaultValue={defaults.guestName}
-          placeholder="Ex : Famille Mbarga ou M. & Mme Talla"
+          placeholder={mode === "create" && ticketType === "couple" ? "Ex : Nampa" : "Ex : Cédric Nampa"}
           className={inputClass}
         />
       </div>
 
       <div>
+        {mode === "edit" && <>
         <label htmlFor="guestCount" className={labelClass}>
           Nombre de personnes
         </label>
@@ -66,6 +81,8 @@ export function TicketForm({
           placeholder="Ex : 4"
           className={inputClass}
         />
+        </>}
+        {mode === "create" && <p className="text-sm text-cocoa-light" aria-live="polite">{ticketType === "couple" ? "Ce billet réserve automatiquement 2 places pour le couple." : "Ce billet réserve automatiquement 1 place."}</p>}
         {quotaRemaining !== undefined && quotaRemaining !== null && (
           <p className="mt-2 text-xs font-light text-cocoa-light">
             {quotaRemaining > 0

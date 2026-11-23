@@ -68,7 +68,7 @@ export default async function TicketInvitationPage({
 
       {/* Aperçu du billet */}
       <div className="flex justify-center">
-        <div className="max-w-md">
+        <div className="w-full max-w-[720px]">
           <DownloadableInvitation filename={`billet-${ticket.reference}.png`}>
             <InvitationCard
               guestName={ticket.guestName}
@@ -81,7 +81,7 @@ export default async function TicketInvitationPage({
       </div>
 
       {/* Lien et actions */}
-      <div className="mx-auto max-w-md space-y-6 border-t border-cocoa/10 pt-8">
+      <div className="mx-auto max-w-[720px] space-y-6 border-t border-cocoa/10 pt-8">
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-cocoa-light">
             Lien de l&apos;invitation

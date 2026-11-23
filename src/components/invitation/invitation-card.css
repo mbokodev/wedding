@@ -1,0 +1,96 @@
+.evening-ticket { container-type: inline-size; position: relative; isolation: isolate; overflow: hidden; width: 100%; max-width: 720px; background: #fffdf8; color: #282d25; font-family: var(--font-cormorant),Georgia,serif; box-shadow: 0 14px 50px #263c241a; text-align: center; }
+.evening-ticket-frame { position: absolute; inset: 1.8%; border: 1px solid #ae8732; border-radius: 24px 4px 24px 4px; z-index: 3; pointer-events: none; }
+.evening-ticket-frame::after { content: ""; position: absolute; inset: 5px; border: 1px solid #c5a459; border-radius: 20px 2px 20px 2px; }
+.evening-ticket-portrait {
+  position: absolute; left: -10%; top: 18%; width: 66%; height: 72%; z-index: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 0 42%, transparent 42%), radial-gradient(ellipse 65% 52% at 50% 35%, #000 62%, #000d9 73%, #00066 86%, transparent 100%);
+  mask-image: linear-gradient(#000 0 42%, transparent 42%), radial-gradient(ellipse 65% 52% at 50% 35%, #000 62%, #000d9 73%, #00066 86%, transparent 100%);
+  -webkit-mask-composite: source-over;
+  mask-composite: add;
+  mask-repeat: no-repeat;
+}
+.evening-ticket-portrait img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 54% top;
+  -webkit-mask-image: linear-gradient(90deg, #000 78%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 78%, transparent 100%);
+}
+.evening-ticket-flowers { position: absolute; object-fit: contain; pointer-events: none; z-index: 4; }
+.evening-ticket-flowers-top { top: -2%; right: -3%; width: 35%; height: auto; transform: rotate(180deg); }
+.evening-ticket-flowers-bottom { bottom: -2%; left: -3%; width: 43%; height: auto; }
+.evening-ticket-content { position: relative; min-height: 130cqw; padding: 9cqw 5cqw 6cqw 0; }
+.evening-ticket-copy { position: relative; margin-left: 48%; z-index: 2; }
+.evening-ticket-intro { font-size: 3.25cqw; font-style: italic; line-height: 1.3; }
+.evening-ticket-divider { display: flex; justify-content: center; align-items: center; gap: 1.5cqw; color: #ad852b; font-size: 2.8cqw; margin: 1.8cqw 3cqw; }
+.evening-ticket-divider span { flex: 1; height: 1px; background: linear-gradient(90deg,transparent,#ad852b); }.evening-ticket-divider span:last-child { transform: rotate(180deg); }
+.evening-ticket-names { font-family: var(--font-pinyon),cursive; font-size: 7.7cqw; color: #987019; font-weight: 400; line-height: 1.08; margin: 3cqw -1cqw; }
+.evening-ticket-names span { display: block; font-family: var(--font-cormorant),serif; font-size: 5.4cqw; line-height: 1; margin: 1cqw 0; }
+.evening-ticket-motto { font-size: 3.1cqw; font-style: italic; line-height: 1.35; margin-top: 2.5cqw; }
+.evening-ticket-guest { margin: 1.5cqw 0 2.5cqw; padding: 2cqw 1.5cqw; background: #fffdf8ed; border: 1px solid #b5965899; border-radius: 1.2cqw; }
+.evening-ticket-guest > p { font-family: var(--font-jost),sans-serif; font-size: 1.5cqw; letter-spacing: .12em; text-transform: uppercase; color: #967326; }
+.evening-ticket-guest h2 { font-size: 5.2cqw; font-weight: 700; color: #43563e; line-height: 1.15; margin: 0; overflow-wrap: anywhere; }
+.evening-ticket-guest > span { font-family: var(--font-jost),sans-serif; font-size: 1.7cqw; color: #657252; }
+.evening-ticket-info { display: flex; align-items: flex-start; gap: 2cqw; text-align: left; margin: 2.5cqw 0; }
+.evening-ticket-info > svg { flex-shrink: 0; width: 5cqw; height: 5cqw; margin-top: .6cqw; color: #ad852b; }
+.evening-ticket-info p { font-size: 2cqw; font-weight: 600; letter-spacing: .12em; color: #987019; text-transform: uppercase; }
+.evening-ticket-info strong { display: block; font-size: 3.7cqw; font-weight: 500; line-height: 1.1; margin: .7cqw 0; }
+.evening-ticket-info span { display: block; font-size: 2.6cqw; line-height: 1.4; }
+.evening-ticket-venue strong { font-size: 4.2cqw; }
+.evening-ticket-blessing { font-family: var(--font-pinyon),cursive; font-size: 5.7cqw; color: #987019; margin: 1cqw -1cqw 2cqw; }
+.evening-ticket-theme { font-family: var(--font-jost),sans-serif; font-size: 1.8cqw; color: #566747; letter-spacing: .06em; }
+.evening-ticket-signature { font-size: 2.9cqw; font-style: italic; line-height: 1.25; margin-top: 2cqw; }
+.evening-ticket-admission {
+  position: absolute;
+  top: -5cqw;
+  left: -5cqw;
+  width: 26cqw;
+  height: 26cqw;
+  border-radius: 50%;
+  background: #fffdf8;
+  z-index: 5;
+}
+.evening-ticket-admission .evening-ticket-qr {
+  position: absolute;
+  top: 5cqw;
+  left: 5cqw;
+  padding: 1cqw;
+  border-radius: 0;
+}
+.evening-ticket-admission .evening-ticket-qr img,
+.evening-ticket-admission .evening-ticket-qr-placeholder { width: 15cqw; height: 15cqw; }
+.evening-ticket-admission .evening-ticket-qr-corner { display: none; }
+.evening-ticket-qr { position: relative; display: inline-block; padding: 2cqw; background: #fffdf8; border-radius: 1.8cqw; }
+.evening-ticket-qr-corner { position: absolute; width: 3.5cqw; height: 3.5cqw; border: 0 solid #b59658; pointer-events: none; }
+.evening-ticket-qr-corner.top-left { top: 0; left: 0; border-width: 1px 0 0 1px; border-top-left-radius: 1.8cqw; }
+.evening-ticket-qr-corner.top-right { top: 0; right: 0; border-width: 1px 1px 0 0; border-top-right-radius: 1.8cqw; }
+.evening-ticket-qr-corner.bottom-left { bottom: 0; left: 0; border-width: 0 0 1px 1px; border-bottom-left-radius: 1.8cqw; }
+.evening-ticket-qr-corner.bottom-right { bottom: 0; right: 0; border-width: 0 1px 1px 0; border-bottom-right-radius: 1.8cqw; }
+.evening-ticket-qr img { display: block; width: 20cqw; height: 20cqw; }
+.evening-ticket-qr-placeholder { width: 20cqw; height: 20cqw; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5cqw; border: 0; color: #43563e; background: #fffdf8; }
+.evening-ticket-qr-placeholder svg { width: 6cqw; height: 6cqw; }.evening-ticket-qr-placeholder span { font-family: var(--font-jost),sans-serif; font-size: 1.6cqw; }
+.evening-ticket-admission > p { font-size: 1.9cqw; line-height: 1.3; margin-top: 1cqw; }.evening-ticket-reference { font-family: monospace; font-size: 1.5cqw; color: #816724; }
+@media print { .evening-ticket { box-shadow: none; break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; width: 170mm; max-width: 100%; margin: auto; } }
+
+.evening-ticket-theme { display: flex; justify-content: center; gap: 3cqw; margin: 2cqw 0; }
+.evening-ticket-theme > div { text-align: center; }
+.evening-ticket-theme span { display: block; width: 6.5cqw; height: 6.5cqw; margin: 0 auto 1cqw; border-radius: 50%; border: .5cqw solid #ffffff90; outline: 1px solid #b5965860; }
+
+/* Or chaud et uniforme, conforme au modèle de référence. */
+.evening-ticket-names {
+  color: #a2751b;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  filter: none;
+}
+
+/* Salle de réception floutée sous un voile ivoire pour préserver la lecture. */
+.evening-ticket::before {
+  content: "";
+  position: absolute;
+  inset: -1.5%;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, #fffdf88c, #fffdf8c9 55%, #fffdf8ba), url("/images/generated/ticket-reception-background.png") center / cover no-repeat;
+  filter: blur(3px);
+}
+
+.evening-ticket-invitation-ending { font-size: 3.1cqw; font-style: italic; line-height: 1.35; margin: -1cqw 0 2cqw; }

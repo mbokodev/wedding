@@ -25,7 +25,7 @@ export default async function InvitationPage({
 
   return (
     <main className="min-h-svh bg-ivory-dark px-4 py-10 md:py-16 print:bg-white print:p-0">
-      <div className="mx-auto max-w-md print:max-w-none">
+      <div className="mx-auto max-w-[720px] print:max-w-none">
         <InvitationCard
           guestName={invitation.guestName}
           guestCount={invitation.guestCount}

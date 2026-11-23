@@ -18,3 +18,9 @@ export const ticketSchema = z.object({
 });
 
 export type TicketFormValues = z.infer<typeof ticketSchema>;
+
+/** À la création, le nombre de places est calculé exclusivement côté serveur. */
+export const createTicketSchema = z.object({
+  guestName: ticketSchema.shape.guestName,
+  ticketType: z.enum(["simple", "couple"], { message: "Choisissez un billet simple ou couple." }),
+}).transform(({ guestName, ticketType }) => ({ guestName, guestCount: ticketType === "couple" ? 2 : 1 }));

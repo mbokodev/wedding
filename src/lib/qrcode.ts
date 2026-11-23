@@ -5,11 +5,11 @@ import QRCode from "qrcode";
 export async function generateQrDataUrl(url: string): Promise<string> {
   return QRCode.toDataURL(url, {
     errorCorrectionLevel: "M",
-    margin: 1,
+    margin: 4,
     width: 480,
     color: {
-      dark: "#3E2F23", // brun profond
-      light: "#FFFFFF00", // fond transparent
+      dark: "#43563E", // vert sauge foncé
+      light: "#FFFDF8", // ivoire, avec zone calme pour la lecture
     },
   });
 }

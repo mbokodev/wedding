@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/server/db";
 import { requireUserOrThrow } from "@/server/auth/guards";
-import { ticketSchema } from "@/validations/tickets";
+import { ticketSchema, createTicketSchema } from "@/validations/tickets";
 import {
   generateTicketToken,
   formatTicketReference,
@@ -45,7 +45,7 @@ export async function createTicket(
 ): Promise<TicketActionState> {
   const user = await requireUserOrThrow(["SUPER_ADMIN", "ADMIN"]);
 
-  const parsed = ticketSchema.safeParse(formValues(formData));
+  const parsed = createTicketSchema.safeParse({ guestName: formData.get("guestName"), ticketType: formData.get("ticketType") });
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? "Formulaire invalide." };
   }

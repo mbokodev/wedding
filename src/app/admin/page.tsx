@@ -56,14 +56,18 @@ async function SuperAdminDashboard() {
   return (
     <div className="space-y-12">
       <section>
-        <h1 className="font-serif text-3xl font-light text-cocoa">
-          Vue d&rsquo;ensemble
-        </h1>
-        <dl className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="admin-welcome">
+          <div><p className="admin-eyebrow">Chaque détail compte</p>
+          <h1>Préparons <em>notre grand jour.</em></h1>
+          <p>Vos invitations, vos proches et les préparatifs, réunis au même endroit.</p></div>
+          <Link href="/admin/tickets/new" className="admin-primary">+ Créer un billet</Link>
+        </div>
+        <h2 className="admin-section-title">En un regard</h2>
+        <dl className="admin-stats">
           {cards.map((card) => (
             <div
               key={card.label}
-              className="border border-cocoa/10 bg-white px-5 py-4"
+              className="admin-stat-card"
             >
               <dt className="text-[11px] uppercase tracking-[0.18em] text-cocoa-light">
                 {card.label}
@@ -83,8 +87,8 @@ async function SuperAdminDashboard() {
         </dl>
       </section>
 
-      <section>
-        <div className="flex items-baseline justify-between">
+      <section className="admin-quota-panel">
+        <div className="admin-panel-heading">
           <h2 className="font-serif text-2xl font-light text-cocoa">
             Répartition des quotas
           </h2>
@@ -110,7 +114,7 @@ async function SuperAdminDashboard() {
               const over = quota > 0 && used > quota;
 
               return (
-                <li key={admin.id} className="border border-cocoa/10 bg-white px-5 py-4">
+                <li key={admin.id} className="admin-quota-card">
                   <div className="flex items-baseline justify-between gap-4">
                     <p className="text-sm text-cocoa">
                       {admin.fullName}
@@ -161,7 +165,7 @@ async function AdminDashboard({
 
   return (
     <div className="space-y-8">
-      <h1 className="font-serif text-3xl font-light text-cocoa">Mes invitations</h1>
+      <div className="admin-welcome"><div><p className="admin-eyebrow">Nos proches, à nos côtés</p><h1>Mes <em>invitations.</em></h1><p>Préparez les billets de ceux qui partageront cette journée.</p></div><Link href="/admin/tickets/new" className="admin-primary">+ Créer un billet</Link></div>
       <dl className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <div className="border border-cocoa/10 bg-white px-5 py-4">
           <dt className="text-[11px] uppercase tracking-[0.18em] text-cocoa-light">
@@ -191,8 +195,8 @@ async function AdminDashboard({
         </div>
       </dl>
       <p className="text-sm font-light text-cocoa-light">
-        La gestion de vos billets (création, modification, invitations) sera
-        disponible dans la prochaine étape.
+        Retrouvez vos invitations, téléchargez les billets et partagez-les avec vos proches.
+        {" "}<Link href="/admin/tickets" className="underline underline-offset-4">Gérer mes billets →</Link>
       </p>
     </div>
   );

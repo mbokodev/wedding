@@ -33,9 +33,9 @@ function formValues(formData: FormData) {
   return {
     fullName: formData.get("fullName"),
     email: formData.get("email"),
-    phone: formData.get("phone"),
+    phone: formData.get("phone") ?? "",
     role: formData.get("role"),
-    quota: formData.get("quota"),
+    quota: formData.get("quota") ?? "",
     password: formData.get("password"),
   };
 }
@@ -54,6 +54,9 @@ export async function createUser(
 
   const normalized = normalizeUserInput(parsed.data);
   if ("error" in normalized) return { error: normalized.error };
+
+  const existing = await db.user.findUnique({ where: { email: normalized.data.email! }, select: { id: true } });
+  if (existing) return { error: "Un compte utilise déjà cet identifiant. Ajoutez un prénom ou un nom pour le distinguer." };
 
   try {
     await db.user.create({

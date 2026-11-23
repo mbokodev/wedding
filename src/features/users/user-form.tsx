@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import type { UserActionState } from "@/features/users/actions";
+import { userEmailFromName } from "@/lib/user-email";
 
 const initialState: UserActionState = { error: null };
 
@@ -42,6 +43,8 @@ export function UserForm({
 }) {
   const [state, formAction, pending] = useActionState(action, initialState);
   const [role, setRole] = useState(defaults.role);
+  const [showPassword, setShowPassword] = useState(false);
+  const [fullName, setFullName] = useState(defaults.fullName);
 
   return (
     <form action={formAction} className="max-w-xl space-y-5">
@@ -54,14 +57,20 @@ export function UserForm({
           name="fullName"
           type="text"
           required
-          defaultValue={defaults.fullName}
+          value={fullName}
+          onChange={event => setFullName(event.target.value)}
           placeholder="Ex : Tante Rosalie"
           className={inputClass}
         />
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
+      {mode === "create" && (
+        <p className="rounded-lg border border-gold/30 bg-sage-light/50 px-4 py-3 text-sm text-cocoa" aria-live="polite">
+          Identifiant de connexion : <strong className="break-all">{userEmailFromName(fullName) || "généré à partir du nom complet"}</strong>
+        </p>
+      )}
+      <div className={mode === "edit" ? "grid gap-5 sm:grid-cols-2" : "grid gap-5"}>
+        {mode === "edit" && <div>
           <label htmlFor="email" className={labelClass}>
             Email <span className="normal-case text-cocoa/40">(optionnel)</span>
           </label>
@@ -73,7 +82,7 @@ export function UserForm({
             placeholder="prenom@exemple.com"
             className={inputClass}
           />
-        </div>
+        </div>}
         <div>
           <label htmlFor="phone" className={labelClass}>
             Téléphone <span className="normal-case text-cocoa/40">(optionnel)</span>
@@ -88,10 +97,10 @@ export function UserForm({
           />
         </div>
       </div>
-      <p className="text-xs font-light text-cocoa-light">
+      {mode === "edit" && <p className="text-xs font-light text-cocoa-light">
         Au moins un des deux est requis : il servira d&rsquo;identifiant de
         connexion.
-      </p>
+      </p>}
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -149,15 +158,32 @@ export function UserForm({
             </span>
           )}
         </label>
+        <div className="relative">
         <input
           id="password"
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           autoComplete="new-password"
           required={mode === "create"}
           minLength={mode === "create" ? 8 : undefined}
-          className={inputClass}
+          className={`${inputClass} pr-14`}
         />
+        <button
+          type="button"
+          onClick={() => setShowPassword(value => !value)}
+          aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+          aria-controls="password"
+          aria-pressed={showPassword}
+          title={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+          className="absolute right-1 bottom-1 flex h-11 w-11 items-center justify-center rounded-md text-sage-dark transition-colors hover:bg-sage-light hover:text-cocoa focus-visible:outline-2 focus-visible:outline-gold"
+        >
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+            <circle cx="12" cy="12" r="3" />
+            {showPassword && <path d="m3 3 18 18" />}
+          </svg>
+        </button>
+        </div>
         {mode === "create" && (
           <p className="mt-2 text-xs font-light text-cocoa-light">
             8 caractères minimum. Communiquez-le à la personne concernée.

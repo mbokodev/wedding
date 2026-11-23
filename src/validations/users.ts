@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { normalizeIdentifier } from "@/validations/auth";
+import { userEmailFromName } from "@/lib/user-email";
 
 /**
  * Validation des formulaires de gestion des utilisateurs (SUPER_ADMIN).
@@ -31,8 +32,14 @@ const passwordRequired = z
 
 export const createUserSchema = z.object({
   ...baseFields,
+  // La valeur envoyée par le navigateur n'est jamais utilisée à la création.
+  email: z.unknown().optional(),
   password: passwordRequired,
-});
+}).transform(values => ({ ...values, email: userEmailFromName(values.fullName) }))
+  .refine(values => values.email !== "", {
+    message: "Ce nom ne permet pas de générer un identifiant. Utilisez un nom en lettres latines, plus court si nécessaire.",
+    path: ["fullName"],
+  });
 
 export const updateUserSchema = z.object({
   ...baseFields,

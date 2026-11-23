@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./admin.css";
 import Link from "next/link";
 import { requireUser } from "@/server/auth/guards";
 import { LogoutButton } from "@/features/auth/logout-button";
@@ -29,25 +30,20 @@ export default async function AdminLayout({ children }: LayoutProps<"/admin">) {
   ];
 
   return (
-    <div className="min-h-svh bg-ivory">
-      <header className="border-b border-cocoa/10 bg-white/70 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-5 pt-5">
-          <Link href="/admin" className="font-serif text-xl text-cocoa">
-            A&nbsp;<span className="text-gold">&amp;</span>&nbsp;C
-            <span className="ml-3 text-xs font-sans uppercase tracking-[0.25em] text-cocoa-light">
-              Administration
-            </span>
-          </Link>
-          <div className="flex items-center gap-5 text-xs text-cocoa-light">
-            <span className="hidden sm:inline">{user.fullName}</span>
-            <LogoutButton className="text-cocoa" />
+    <div className="admin-shell">
+      <header className="admin-header">
+        <div className="admin-header-inner">
+          <Link href="/admin" className="admin-brand">Ange & Cédric<span>Les coulisses du grand jour</span></Link>
+          <div className="admin-account">
+            <span className="admin-avatar" aria-hidden="true">{user.fullName.charAt(0)}</span>
+            <div><strong>{user.fullName}</strong><span>{user.role === "SUPER_ADMIN" ? "Super administrateur" : "Administrateur"}</span></div>
+            <LogoutButton className="admin-logout" />
           </div>
         </div>
-        <div className="mx-auto max-w-5xl px-5">
-          <AdminNav items={items} />
-        </div>
+        <div className="admin-nav-wrap"><AdminNav items={items} /></div>
       </header>
-      <main className="mx-auto max-w-5xl px-5 py-10">{children}</main>
+      <main className="admin-main">{children}</main>
+      <footer className="admin-footer"><span>26 décembre 2026 · Douala</span><Link href="/">Voir le site du mariage ↗</Link></footer>
     </div>
   );
 }

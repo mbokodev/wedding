@@ -14,7 +14,7 @@ export function AdminNav({ items }: { items: AdminNavItem[] }) {
   const pathname = usePathname();
 
   return (
-    <nav className="-mb-px flex gap-1 overflow-x-auto">
+    <nav className="admin-nav" aria-label="Administration">
       {items.map((item) => {
         const active =
           item.href === "/admin"
@@ -24,6 +24,7 @@ export function AdminNav({ items }: { items: AdminNavItem[] }) {
           <Link
             key={item.href}
             href={item.href}
+            aria-current={active ? "page" : undefined}
             className={cn(
               "whitespace-nowrap border-b-2 px-4 py-3 text-xs uppercase tracking-[0.2em] transition-colors",
               active

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./login.css";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { wedding } from "@/config/wedding";
@@ -18,33 +19,23 @@ export default async function LoginPage() {
   if (user) redirect(homeForRole(user.role));
 
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center bg-ivory-dark px-4 py-12">
-      <div className="w-full max-w-sm">
-        <div className="text-center">
-          <Link href="/" className="font-script text-4xl text-gold">
-            {wedding.couple.initials}
-          </Link>
-          <h1 className="mt-4 font-serif text-2xl font-light text-cocoa">
-            Espace privé
-          </h1>
-          <p className="mt-2 text-sm font-light text-cocoa-light">
-            Gestion des invitations et contrôle des entrées
-          </p>
-        </div>
-
-        <div className="mt-8 border border-gold/30 bg-ivory p-6 sm:p-8 shadow-[0_4px_30px_rgba(62,47,35,0.08)]">
+    <main className="login-page">
+      <header className="login-header">
+        <Link href="/" className="login-brand">{wedding.couple.displayName}</Link>
+      </header>
+      <div className="login-content">
+        <section className="login-card" aria-labelledby="login-title">
+          <div className="login-ornament" aria-hidden="true"><span />♡<span /></div>
+          <p className="login-eyebrow">Dans les coulisses du grand jour</p>
+          <h1 id="login-title">Bienvenue <em>à nos côtés.</em></h1>
+          <p className="login-description">Un espace pour préparer ensemble<br />le plus beau de nos jours.</p>
+          <div className="login-form-heading"><span />Espace privé<span /></div>
           <LoginForm />
-        </div>
-
-        <p className="mt-6 text-center">
-          <Link
-            href="/"
-            className="text-xs uppercase tracking-[0.2em] text-cocoa-light underline-offset-4 transition-colors hover:text-gold hover:underline"
-          >
-            ← Retour au site du mariage
-          </Link>
-        </p>
+          <p className="login-caption">Invitations & accueil de nos proches</p>
+        </section>
+        <Link href="/" className="login-back">← Retour au site du mariage</Link>
       </div>
+      <footer className="login-footer">26 décembre 2026 <span>·</span> Douala, Cameroun</footer>
     </main>
   );
 }

@@ -9,7 +9,7 @@ export function LoginForm() {
   const [state, formAction, pending] = useActionState(login, initialState);
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} className="login-form">
       <div>
         <label
           htmlFor="identifier"
@@ -23,7 +23,6 @@ export function LoginForm() {
           type="text"
           autoComplete="username"
           required
-          autoFocus
           placeholder="vous@exemple.com ou +237 6XX XX XX XX"
           className="mt-2 w-full border border-cocoa/20 bg-white px-4 py-3 text-base text-cocoa placeholder:text-cocoa/35 outline-none transition-colors focus:border-gold"
         />
