@@ -100,10 +100,12 @@ export function WeddingDay() {
       <div className="day-cover-shade" />
       <div className="day-cover-content"><p className="home-eyebrow">Chapitre III · Le grand jour</p><h2 id="day-title">Un jour à part.<br /><em>Une vie devant nous.</em></h2><p>26 décembre 2026 · Douala, Cameroun</p><Countdown targetIso={wedding.date.iso} /><CalendarDialog /></div>
     </div>
+    {/* Programme temporairement masqué. Décommenter ce bloc pour le réactiver.
     <div id="programme" className="day-program">
       <Reveal className="program-heading"><p className="home-eyebrow">Les moments de la journée</p><h3>Du premier regard<br /><em>à la dernière danse.</em></h3></Reveal>
       <ol className="program-steps">{wedding.program.map((step,i) => <Reveal key={step.time} as="li" delay={i * 70}><span className="program-icon" aria-hidden="true">{["♧","✧","♡","♫"][i]}</span><span className="program-time">{step.time}</span><h4>{step.title}</h4><p>{step.description}</p></Reveal>)}</ol>
     </div>
+    */}
     <section id="dress-code" className="dress-theme" aria-labelledby="dress-title">
       <Petals gentle />
       <div className="dress-theme-layout">
