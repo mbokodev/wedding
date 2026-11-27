@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { wedding } from "@/config/wedding";
-import { isPreview, siteUrl, socialImage } from "@/config/seo";
+import { isPreview, siteUrl, siteName, socialImage } from "@/config/seo";
 import "./globals.css";
 
 const cormorant = localFont({
@@ -34,11 +34,11 @@ export const metadata: Metadata = {
     template: `%s — ${wedding.couple.displayName}`,
   },
   description: wedding.meta.description,
-  applicationName: "Ange & Cédric",
+  applicationName: siteName,
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    siteName: "Ange & Cédric",
+    siteName,
     title: wedding.meta.title,
     description: wedding.meta.description,
     images: [socialImage],
@@ -49,7 +49,14 @@ export const metadata: Metadata = {
     description: wedding.meta.description,
     images: [socialImage],
   },
-  robots: isPreview ? { index: false, follow: false } : { index: true, follow: true },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
+  robots: isPreview ? { index: false, follow: false } : {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#53664e" };

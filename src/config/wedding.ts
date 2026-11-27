@@ -206,7 +206,7 @@ export const wedding = {
   meta: {
     title: "Ange de Cedric",
     description:
-      "Ange et Cédric se marient le 26 décembre 2026 à Douala. Découvrez notre histoire, notre famille, notre foi et les informations du grand jour.",
+      "Mariage d’Ange et Cédric le 26 décembre 2026 à Douala, Cameroun. Découvrez notre histoire, le thème vert sauge, blanc et or, et confirmez votre présence.",
     /** URL de production (utilisée pour les QR codes et liens absolus) */
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://angedecedric.com",
   },

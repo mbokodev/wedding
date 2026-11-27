@@ -35,7 +35,7 @@ export function Hero() {
           <div className="dream-signature-flourish" aria-hidden="true"><span />✧<span /></div>
         </div>
 
-        <h1 id="announcement-title" className="sr-only">Mariage d’Ange et Cédric — 26 décembre 2026</h1>
+        <h1 id="announcement-title" className="sr-only">Mariage d’Ange et Cédric — 26 décembre 2026 à Douala</h1>
         <aside className="dream-announcement dream-scripture" aria-label="Genèse 2:24">
           <Reveal className="hero-verse-reveal hero-verse-left">
           <span className="dream-verse-star" aria-hidden="true">✧</span>
