@@ -59,6 +59,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 # Séparé du node_modules du standalone pour ne pas casser sa résolution.
 COPY --from=deps --chown=nextjs:nodejs /app/node_modules /app/migrate/node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/prisma /app/migrate/prisma
+COPY --from=builder --chown=nextjs:nodejs /app/src/generated/prisma /app/migrate/src/generated/prisma
 COPY --from=builder --chown=nextjs:nodejs /app/prisma.config.ts /app/migrate/prisma.config.ts
 COPY --from=builder --chown=nextjs:nodejs /app/package.json /app/migrate/package.json
 
